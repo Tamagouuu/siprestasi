@@ -10,4 +10,6 @@ if ($idLomba == null) {
 
 mysqli_query($conn, "DELETE FROM tb_lomba WHERE lid = '$idLomba'");
 
-return redirect('admin/lomba/index.php');
+set_flash('success', 'Berhasil menghapus data lomba!');
+header('location: index.php');
+die;

@@ -27,7 +27,9 @@ if (isset($_POST['submit'])) {
         tid = '$tapel_id'
     ");
 
-    reopen_page();
+    set_flash('success', 'Berhasil mengupdate data lomba!');
+    header('location: index.php');
+    die;
 }
 
 ?>
