@@ -7,7 +7,7 @@ $tingkat_option = get_tingkat_lomba_option();
 $jenis_option =  get_jenis_lomba_option();
 $tahun_pelajaran = query('SELECT * FROM tb_tapel');
 
-$idLomba = mysqli_escape_string($conn,$_GET['lid']);
+$idLomba = mysqli_escape_string($conn, $_GET['lid']);
 
 $lomba = query("SELECT * FROM tb_lomba WHERE lid = '$idLomba'")[0] ?? null;
 if (isset($_POST['submit'])) {
@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     $tahun = mysqli_escape_string($conn, $_POST['ltahun']);
     $tapel_id = mysqli_escape_string($conn, $_POST['tid']);
 
-    $q = mysqli_query($conn,"UPDATE tb_lomba SET 
+    $q = mysqli_query($conn, "UPDATE tb_lomba SET 
         ljenis = '$jenis',
         lnama = '$nama',
         ltingkat = '$tingkat',
@@ -76,45 +76,45 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="lnama" class="form-label">Nama Lomba</label>
-                            <input name="lnama" class="form-control" id="lnama" value="<?= $lomba['lnama']?>"/>
+                            <input name="lnama" class="form-control" id="lnama" value="<?= $lomba['lnama'] ?>" />
                         </div>
                         <div class="mb-3">
                             <label for="ltahun" class="form-label">Tahun Lomba</label>
-                            <input type="number" name="ltahun" class="form-control" id="ltahun" value="<?= $lomba['ltahun']?>"/>
+                            <input type="number" name="ltahun" class="form-control" id="ltahun" value="<?= $lomba['ltahun'] ?>" />
                         </div>
                         <div class="mb-3">
                             <label for="ltingkat" class="form-label">Tingkat Lomba</label>
                             <select name="ltingkat" id="ltingkat" class="form-control">
-                                <?php foreach ($tingkat_option as $option):?>
-                                    <option value="<?= $option?>" <?php if($option == $lomba['ltingkat']):?> selected <?php endif?>>
-                                        <?= $option?>
+                                <?php foreach ($tingkat_option as $option) : ?>
+                                    <option value="<?= $option ?>" <?php if ($option == $lomba['ltingkat']) : ?> selected <?php endif ?>>
+                                        <?= $option ?>
                                     </option>
-                                    <?php endforeach;?>
-                                </select>
-                            </div>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                         <div class="mb-3">
-                        <label for="ljenis" class="form-label">Jenis Lomba</label>
+                            <label for="ljenis" class="form-label">Jenis Lomba</label>
                             <select name="ljenis" id="ljenis" class="form-control">
-                                <?php foreach ($jenis_option as $jenis_kode => $jenis_label):?>
-                                    <option value="<?= $jenis_kode?>" <?php if($jenis_kode == $lomba['ljenis']):?> selected <?php endif?>>
-                                        <?= $jenis_label?>
+                                <?php foreach ($jenis_option as $jenis_kode => $jenis_label) : ?>
+                                    <option value="<?= $jenis_kode ?>" <?php if ($jenis_kode == $lomba['ljenis']) : ?> selected <?php endif ?>>
+                                        <?= $jenis_label ?>
                                     </option>
-                                <?php endforeach;?>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="tid" class="form-label">Tahun Pelajaran</label>
                             <select name="tid" id="tid" class="form-control">
-                                <?php foreach ($tahun_pelajaran as $option):?>
-                                    <option value="<?= $option['tid']?>" <?php if($option['tid'] == $lomba['tid']):?> selected <?php endif?>>
-                                        <?= $option['ttapel']?>
+                                <?php foreach ($tahun_pelajaran as $option) : ?>
+                                    <option value="<?= $option['tid'] ?>" <?php if ($option['tid'] == $lomba['tid']) : ?> selected <?php endif ?>>
+                                        <?= $option['ttapel'] ?>
                                     </option>
-                                <?php endforeach;?>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="lpenyelenggara" class="form-label">Penyelenggara</label>
-                            <input name="lpenyelenggara" class="form-control" id="lpenyelenggara" value="<?= $lomba['lpenyelenggara']?>"/>
+                            <input name="lpenyelenggara" class="form-control" id="lpenyelenggara" value="<?= $lomba['lpenyelenggara'] ?>" />
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Lomba</button>
