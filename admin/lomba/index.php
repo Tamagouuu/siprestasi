@@ -1,8 +1,9 @@
 <?php
-include '../config.php';
-include '../functions.php';
-
+include '../../config.php';
+include '../../functions.php';
 guest_move_to_login();
+
+$data = query('SELECT * FROM tb_lomba INNER JOIN tb_tapel ON tb_lomba.tid = tb_tapel.tid');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +19,11 @@ guest_move_to_login();
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -32,7 +33,7 @@ guest_move_to_login();
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once "./partial/sidebar.php" ?>
+        <?php require_once "../partial/sidebar.php" ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -41,7 +42,7 @@ guest_move_to_login();
             <!-- Main Content -->
             <div id="content">
 
-                <?php require_once "./partial/topbar.php" ?>
+                <?php require_once "../partial/topbar.php" ?>
 
 
                 <!-- Begin Page Content -->
@@ -54,7 +55,6 @@ guest_move_to_login();
 
                     <!-- Content Row -->
                     <div class="row">
-
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
@@ -72,7 +72,6 @@ guest_move_to_login();
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
 
@@ -84,7 +83,7 @@ guest_move_to_login();
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <?php require_once "./partial/footer.php" ?>
+            <?php require_once "../partial/footer.php" ?>
 
             <!-- End of Footer -->
 
@@ -100,24 +99,24 @@ guest_move_to_login();
     </a>
 
     <!-- Logout Modal-->
-    <?php require_once "./partial/logout-modal.php" ?>
+    <?php require_once "../partial/logout-modal.php" ?>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="../../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
+    <script src="../../vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="../../js/demo/chart-area-demo.js"></script>
+    <script src="../../js/demo/chart-pie-demo.js"></script>
 
 </body>
 

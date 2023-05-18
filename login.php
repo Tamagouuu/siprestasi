@@ -1,9 +1,22 @@
 <?php
 
-session_start();
+include('config.php');
+include('functions.php');
 
-if (isset($_SESSION['uid'])) {
-    header('location:admin/admindashboard.php');
+// admin_move_to_dashboard();
+
+if (isset($_POST['login'])) {
+    $user = login($_POST['username'], $_POST['password']);
+    if ($user != null && $user['role'] == 'admin') {
+        return redirect('admin/dashboard.php');
+    }
+
+    echo "
+        <script>
+            alert('Username atau password tidak cocok');
+            window.open('login.php', '_self')
+        </script>
+    ";
 }
 
 ?>
@@ -51,10 +64,10 @@ if (isset($_SESSION['uid'])) {
                                     </div>
                                     <form class="user" method="post" action="login.php">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" name="uname" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username">
+                                            <input type="text" name="username" class="form-control form-control-user" name="uname" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" name="pass" id="exampleInputPassword" placeholder="Password">
+                                            <input type="password" name="password" class="form-control form-control-user" name="pass" id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -95,33 +108,3 @@ if (isset($_SESSION['uid'])) {
 </body>
 
 </html>
-
-
-<?php
-
-include('config.php');
-
-if (isset($_POST['login'])) {
-
-    echo "TEST!";
-
-    $username = mysqli_real_escape_string($con, $_POST['uname']);
-    $password = mysqli_real_escape_string($con, $_POST['pass']);
-
-    $qry = "SELECT * FROM `tb_admin` WHERE `ausername` = '$username' AND apassword = '$password' ";
-
-    $run = mysqli_query($con, $qry);
-
-    $row = mysqli_num_rows($run);
-    if ($row > 1) { ?>
-        <script>
-            alert('User not found');
-            window.open('login.php', '_self')
-        </script>
-<?php
-    } else {
-        header('location:admin/admindashboard.php');
-    }
-}
-
-?>
