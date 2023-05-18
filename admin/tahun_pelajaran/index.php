@@ -65,7 +65,7 @@ $data = query('SELECT * FROM tb_tapel');
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Siswa</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Tahun Pelajaran</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -87,10 +87,10 @@ $data = query('SELECT * FROM tb_tapel');
                                             <tr>
                                                 <td><?= $d['ttapel'] ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?sid=<?= $d['tid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?tid=<?= $d['tid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?sid=<?= $d['tid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?tid=<?= $d['tid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>

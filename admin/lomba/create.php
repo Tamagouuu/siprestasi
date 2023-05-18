@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
     $tahun = mysqli_escape_string($conn, $_POST['ltahun']);
     $tapel_id = mysqli_escape_string($conn, $_POST['tid']);
 
-    $q = mysqli_query($conn,"INSERT INTO tb_lomba (`ljenis`,`lnama`,`ltingkat`,`lpenyelenggara`,`ltahun`,`tid`) 
+    $q = mysqli_query($conn, "INSERT INTO tb_lomba (`ljenis`,`lnama`,`ltingkat`,`lpenyelenggara`,`ltahun`,`tid`) 
         VALUES ('$jenis','$nama','$tingkat','$penyelenggara','$tahun','$tapel_id')
     ");
 
@@ -70,45 +70,45 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="lnama" class="form-label">Nama Lomba</label>
-                            <input name="lnama" class="form-control" id="lnama"/>
+                            <input name="lnama" class="form-control" id="lnama" />
                         </div>
                         <div class="mb-3">
                             <label for="ltahun" class="form-label">Tahun Lomba</label>
-                            <input type="number" name="ltahun" class="form-control" id="ltahun"/>
+                            <input type="number" name="ltahun" class="form-control" id="ltahun" />
                         </div>
                         <div class="mb-3">
                             <label for="ltingkat" class="form-label">Tingkat Lomba</label>
                             <select name="ltingkat" id="ltingkat" class="form-control">
-                                <?php foreach ($tingkat_option as $option):?>
-                                    <option value="<?= $option?>" >
-                                        <?= $option?>
+                                <?php foreach ($tingkat_option as $option) : ?>
+                                    <option value="<?= $option ?>">
+                                        <?= $option ?>
                                     </option>
-                                    <?php endforeach;?>
-                                </select>
-                            </div>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                         <div class="mb-3">
-                        <label for="ljenis" class="form-label">Jenis Lomba</label>
+                            <label for="ljenis" class="form-label">Jenis Lomba</label>
                             <select name="ljenis" id="ljenis" class="form-control">
-                                <?php foreach ($jenis_option as $jenis_kode => $jenis_label):?>
-                                    <option value="<?= $jenis_kode?>" >
-                                        <?= $jenis_label?>
+                                <?php foreach ($jenis_option as $jenis_kode => $jenis_label) : ?>
+                                    <option value="<?= $jenis_kode ?>">
+                                        <?= $jenis_label ?>
                                     </option>
-                                <?php endforeach;?>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="tid" class="form-label">Tahun Pelajaran</label>
                             <select name="tid" id="tid" class="form-control">
-                                <?php foreach ($tahun_pelajaran as $option):?>
-                                    <option value="<?= $option['tid']?>" >
-                                        <?= $option['ttapel']?>
+                                <?php foreach ($tahun_pelajaran as $option) : ?>
+                                    <option value="<?= $option['tid'] ?>">
+                                        <?= $option['ttapel'] ?>
                                     </option>
-                                <?php endforeach;?>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="lpenyelenggara" class="form-label">Penyelenggara</label>
-                            <input name="lpenyelenggara" class="form-control" id="lpenyelenggara"/>
+                            <input name="lpenyelenggara" class="form-control" id="lpenyelenggara" />
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Lomba</button>

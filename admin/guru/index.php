@@ -3,7 +3,7 @@ include '../../config.php';
 include '../../functions.php';
 guest_move_to_login();
 
-$data = query('SELECT * FROM tb_siswa');
+$data = query('SELECT * FROM tb_guru');
 
 
 ?>
@@ -73,27 +73,30 @@ $data = query('SELECT * FROM tb_siswa');
                                     <thead>
                                         <tr>
                                             <th>Nama Guru</th>
-                                            <th></th>
+                                            <th>Kontak</th>
+                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>NIS</th>
-                                            <th>Nama</th>
+                                            <th>Nama Guru</th>
+                                            <th>Kontak</th>
+                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php foreach ($data as $d) : ?>
                                             <tr>
-                                                <td><?= $d['sid'] ?></td>
-                                                <td><?= ucfirst($d['snama']) ?></td>
+                                                <td><?= $d['gnama'] ?></td>
+                                                <td><?= $d['gkontak'] ?></td>
+                                                <td><?= $d['gstatus'] ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?sid=<?= $d['sid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?gid=<?= $d['gid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?sid=<?= $d['sid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?gid=<?= $d['gid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>

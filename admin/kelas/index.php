@@ -3,12 +3,9 @@ include '../../config.php';
 include '../../functions.php';
 guest_move_to_login();
 
-$data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid = tb_lomba.lid');
+$data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_tapel.tid');
 
-
-// echo "<pre>";
-// var_dump($data);
-// echo "</pre>";
+// dd($data);
 
 ?>
 <!DOCTYPE html>
@@ -58,9 +55,9 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Prestasi</h1>
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Kelas</h1>
                     </div>
-                    <a href="<?= BASE_URL ?>/admin/lomba/create.php" class="btn btn-success btn-icon-split mb-4">
+                    <a href="<?= BASE_URL ?>/admin/siswa/create.php" class="btn btn-success btn-icon-split mb-4">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
@@ -69,35 +66,38 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Prestasi</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Kelas</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Nama Lomba</th>
-                                            <th>Peringkat</th>
+                                            <th>Nama Kelas</th>
+                                            <th>Tingkat</th>
+                                            <th>Tahun Ajaran</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nama Lomba</th>
-                                            <th>Peringkat</th>
+                                            <th>Nama Kelas</th>
+                                            <th>Tingkat</th>
+                                            <th>Tahun Ajaran</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php foreach ($data as $d) : ?>
                                             <tr>
-                                                <td><?= $d['lnama'] ?></td>
-                                                <td><?= $d['pperingkat'] ?></td>
+                                                <td><?= $d['knama'] ?></td>
+                                                <td><?= $d['ktingkat'] ?></td>
+                                                <td><?= $d['ttapel'] ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?pid=<?= $d['pid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?kid=<?= $d['kid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?pid=<?= $d['pid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?kid=<?= $d['kid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
