@@ -3,7 +3,7 @@
 include('config.php');
 include('functions.php');
 
-// admin_move_to_dashboard();
+admin_move_to_dashboard();
 
 if (isset($_POST['login'])) {
     $user = login($_POST['username'], $_POST['password']);

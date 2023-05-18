@@ -3,8 +3,12 @@ include '../../config.php';
 include '../../functions.php';
 guest_move_to_login();
 
-$data = query('SELECT * FROM tb_lomba INNER JOIN tb_tapel ON tb_lomba.tid = tb_tapel.tid');
+$data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid = tb_lomba.lid');
 
+
+// echo "<pre>";
+// var_dump($data);
+// echo "</pre>";
 
 ?>
 <!DOCTYPE html>
@@ -54,7 +58,7 @@ $data = query('SELECT * FROM tb_lomba INNER JOIN tb_tapel ON tb_lomba.tid = tb_t
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Lomba</h1>
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Prestasi</h1>
                     </div>
                     <a href="<?= BASE_URL ?>/admin/lomba/create.php" class="btn btn-success btn-icon-split mb-4">
                         <span class="icon text-white-50">
@@ -72,35 +76,23 @@ $data = query('SELECT * FROM tb_lomba INNER JOIN tb_tapel ON tb_lomba.tid = tb_t
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Jenis Lomba</th>
                                             <th>Nama Lomba</th>
-                                            <th>Tingkat Lomba</th>
-                                            <th>Penyelenggara Lomba</th>
-                                            <th>Tahun</th>
-                                            <th>Tahun Pelajaran</th>
+                                            <th>Peringkat</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Jenis Lomba</th>
                                             <th>Nama Lomba</th>
-                                            <th>Tingkat Lomba</th>
-                                            <th>Penyelenggara Lomba</th>
-                                            <th>Tahun</th>
-                                            <th>Tahun Pelajaran</th>
+                                            <th>Peringkat</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php foreach ($data as $d) : ?>
                                             <tr>
-                                                <td><?= ($d['ljenis'] == 1) ? 'Lomba Guru' : 'Lomba Siswa' ?></td>
                                                 <td><?= $d['lnama'] ?></td>
-                                                <td><?= ucfirst($d['ltingkat']) ?></td>
-                                                <td><?= $d['lpenyelenggara'] ?></td>
-                                                <td><?= $d['ltahun'] ?></td>
-                                                <td><?= $d['ttapel'] ?></td>
+                                                <td><?= $d['pperingkat'] ?></td>
                                                 <td>
                                                     <a href="<?= BASE_URL ?>/admin/lomba/edit.php?lid=<?= $d['lid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>

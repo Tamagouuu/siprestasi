@@ -3,7 +3,7 @@ include '../../config.php';
 include '../../functions.php';
 guest_move_to_login();
 
-$data = query('SELECT * FROM tb_lomba INNER JOIN tb_tapel ON tb_lomba.tid = tb_tapel.tid');
+$data = query('SELECT * FROM tb_siswa');
 
 
 ?>
@@ -54,9 +54,9 @@ $data = query('SELECT * FROM tb_lomba INNER JOIN tb_tapel ON tb_lomba.tid = tb_t
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Lomba</h1>
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Guru</h1>
                     </div>
-                    <a href="<?= BASE_URL ?>/admin/lomba/create.php" class="btn btn-success btn-icon-split mb-4">
+                    <a href="<?= BASE_URL ?>/admin/siswa/create.php" class="btn btn-success btn-icon-split mb-4">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
@@ -65,47 +65,35 @@ $data = query('SELECT * FROM tb_lomba INNER JOIN tb_tapel ON tb_lomba.tid = tb_t
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Lomba</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Guru</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Jenis Lomba</th>
-                                            <th>Nama Lomba</th>
-                                            <th>Tingkat Lomba</th>
-                                            <th>Penyelenggara Lomba</th>
-                                            <th>Tahun</th>
-                                            <th>Tahun Pelajaran</th>
+                                            <th>Nama Guru</th>
+                                            <th></th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Jenis Lomba</th>
-                                            <th>Nama Lomba</th>
-                                            <th>Tingkat Lomba</th>
-                                            <th>Penyelenggara Lomba</th>
-                                            <th>Tahun</th>
-                                            <th>Tahun Pelajaran</th>
+                                            <th>NIS</th>
+                                            <th>Nama</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php foreach ($data as $d) : ?>
                                             <tr>
-                                                <td><?= ($d['ljenis'] == 1) ? 'Lomba Guru' : 'Lomba Siswa' ?></td>
-                                                <td><?= $d['lnama'] ?></td>
-                                                <td><?= ucfirst($d['ltingkat']) ?></td>
-                                                <td><?= $d['lpenyelenggara'] ?></td>
-                                                <td><?= $d['ltahun'] ?></td>
-                                                <td><?= $d['ttapel'] ?></td>
+                                                <td><?= $d['sid'] ?></td>
+                                                <td><?= ucfirst($d['snama']) ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?lid=<?= $d['lid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?sid=<?= $d['sid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?lid=<?= $d['lid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?sid=<?= $d['sid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
