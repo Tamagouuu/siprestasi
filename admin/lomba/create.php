@@ -1,6 +1,6 @@
 <?php
-include '../../config.php';
-include '../../functions.php';
+require '../../config.php';
+require '../../functions.php';
 
 guest_move_to_login();
 $tingkat_option = get_tingkat_lomba_option();
@@ -8,7 +8,6 @@ $jenis_option =  get_jenis_lomba_option();
 $tahun_pelajaran = query('SELECT * FROM tb_tapel');
 
 if (isset($_POST['submit'])) {
-    global $conn;
     $jenis = mysqli_escape_string($conn, $_POST['ljenis']);
     $nama = mysqli_escape_string($conn, $_POST['lnama']);
     $tingkat = mysqli_escape_string($conn, $_POST['ltingkat']);
