@@ -41,6 +41,21 @@ function get_login_account()
 	return $_SESSION['user'] ?? null;
 }
 
+function get_tingkat_lomba_option()
+{
+	return [
+		'kota/kabupaten','provinsi','nasional','regional','internasional','lainnya'
+	];
+}
+
+function get_jenis_lomba_option()
+{
+	return [
+		'1' => 'Lomba Guru',
+		'2' => 'Lomba Siswa'
+	];
+}
+
 function login($username, $password)
 {
 	global $conn;
