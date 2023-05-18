@@ -19,7 +19,9 @@ if (isset($_POST['submit'])) {
         VALUES ('$jenis','$nama','$tingkat','$penyelenggara','$tahun','$tapel_id')
     ");
 
-    header('location: create.php');
+    set_flash('success','Berhasil membuat data lomba!');
+
+    header('location: index.php');
     die;
 }
 

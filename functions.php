@@ -91,3 +91,26 @@ function reopen_page()
 	header('location: '. $_SERVER['REQUEST_URI']);
     die;
 }
+
+function set_flash($bs_class, $message)
+{
+	$_SESSION['flash'] = [
+		'message' => $message,
+		'bs_class' => $bs_class
+	];
+
+}
+
+function flash()
+{
+	if (isset($_SESSION['flash'])) {
+		$flash_message= $_SESSION['flash']['message'];
+		$bs_class = $_SESSION['flash']['bs_class'];
+		echo "
+			<div class='alert alert-$bs_class'>
+				$flash_message
+			</div>
+		";
+		unset($_SESSION['flash']);
+	}
+}
