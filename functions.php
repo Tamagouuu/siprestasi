@@ -79,8 +79,15 @@ function login($username, $password)
 	return null;
 	
 }
+
 function dd($var)
 {
 	var_dump($var);
 	die;
+}
+
+function reopen_page()
+{
+	header('location: '. $_SERVER['REQUEST_URI']);
+    die;
 }
