@@ -56,7 +56,7 @@ $data = query('SELECT * FROM tb_tapel');
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Siswa</h1>
                     </div>
-                    <a href="<?= BASE_URL ?>/admin/siswa/create.php" class="btn btn-success btn-icon-split mb-4">
+                    <a href="<?= BASE_URL ?>/admin/tahun_pelajaran/create.php" class="btn btn-success btn-icon-split mb-4">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>

@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h4>Tambah Lomba</h4>
+                    <h4>Tambah Data</h4>
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="lnama" class="form-label">Nama Lomba</label>
@@ -110,7 +110,7 @@ if (isset($_POST['submit'])) {
                             <input name="lpenyelenggara" class="form-control" id="lpenyelenggara" />
                         </div>
                         <div>
-                            <button class="btn btn-success" name="submit">Simpan Lomba</button>
+                            <button class="btn btn-success" name="submit">Simpan Data</button>
                         </div>
                     </form>
                 </div>
