@@ -4,18 +4,26 @@ require '../../functions.php';
 
 guest_move_to_login();
 
-$idAdmin = mysqli_escape_string($conn, $_GET['aid']);
+$lomba = query("SELECT * FROM tb_lomba");
 
-$admin = query("SELECT * FROM tb_admin WHERE aid = '$idAdmin'")[0] ?? null;
+
 if (isset($_POST['submit'])) {
-    $ausername = mysqli_escape_string($conn, $_POST['ausername']);
-    $apassword = mysqli_escape_string($conn, $_POST['apassword']);
-    $anama = mysqli_escape_string($conn, $_POST['anama']);
-    $ajabatan = mysqli_escape_string($conn, $_POST['ajabatan']);
+    $dokumen = upload('pdokumen');
 
-    $q = mysqli_query($conn, "UPDATE tb_admin SET ausername = '$ausername', apassword = '$apassword', anama = '$anama', ajabatan = '$ajabatan'  WHERE aid = '$idAdmin'");
+    if (!$dokumen) {
+        set_flash('danger', 'Data gagal ditambahkan!');
+        redirect('/admin/prestasi/index.php');
+        return false;
+    }
 
-    set_flash('success', 'Berhasil mengupdate data admin!');
+    $lid = mysqli_escape_string($conn, $_POST['lid']);
+    $pperingkat = mysqli_escape_string($conn, $_POST['pperingkat']);
+    $pdokumen = mysqli_escape_string($conn, $dokumen);
+
+    $q = mysqli_query($conn, "INSERT INTO tb_prestasi VALUES (null, '$lid', '$pperingkat', '$pdokumen')");
+
+    set_flash('success', 'Berhasil membuat data prestasi!');
+
     header('location: index.php');
     die;
 }
@@ -41,6 +49,7 @@ if (isset($_POST['submit'])) {
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
+
 </head>
 
 <body id="page-top">
@@ -62,25 +71,30 @@ if (isset($_POST['submit'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h4 class="font-weight-bold">Edit Data</h4>
-                    <form method="post" class="card p-3">
-                        <div class="mb-3">
-                            <label for="ausername" class="form-label">Username</label>
-                            <input name="ausername" class="form-control" id="ausername" value="<?= $admin['ausername'] ?>" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="apassword" class="form-label">Password</label>
-                            <input name="apassword" class="form-control" type="password" id="apassword" value="<?= $admin['apassword'] ?>" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="anama" class="form-label">Nama Admin</label>
-                            <input name="anama" class="form-control" id="anama" value="<?= $admin['anama'] ?>" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="ajabatan" class="form-label">Jabatan</label>
-                            <input name="ajabatan" class="form-control" id="ajabatan" value="<?= $admin['ajabatan'] ?>" />
-                        </div>
 
+                    <h4 class="font-weight-bold">Tambah Data</h4>
+                    <form method="post" class="card p-3" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="lid" class="form-label">Lomba</label>
+                            <select name="lid" id="lid" class="form-control">
+                                <?php foreach ($lomba as $option) : ?>
+                                    <option value="<?= $option['lid'] ?>"><?= $option['lnama'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="pperingkat" class="form-label">Peringkat</label>
+                            <input name="pperingkat" class="form-control" id="pperingkat" />
+                        </div>
+                        <div class="input-group mb-3 mt-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Upload Dokumen</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="pdokumen">
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                        </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>
                         </div>
@@ -120,12 +134,14 @@ if (isset($_POST['submit'])) {
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="../../vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="../../js/demo/chart-area-demo.js"></script>
-    <script src="../../js/demo/chart-pie-demo.js"></script>
+    <script>
+        $('#inputGroupFile01').on('change', function() {
+            //get the file name
+            var fileName = $(this).val().replace('C:\\fakepath\\', " ")
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    </script>
 
 </body>
 

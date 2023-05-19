@@ -10,6 +10,8 @@ $tahun_pelajaran = query('SELECT * FROM tb_tapel');
 $idLomba = mysqli_escape_string($conn, $_GET['lid']);
 
 $lomba = query("SELECT * FROM tb_lomba WHERE lid = '$idLomba'")[0] ?? null;
+
+
 if (isset($_POST['submit'])) {
     $jenis = mysqli_escape_string($conn, $_POST['ljenis']);
     $nama = mysqli_escape_string($conn, $_POST['lnama']);

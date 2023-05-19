@@ -32,6 +32,7 @@
               <i class="fas fa-fw fa-user-cog"></i>
               <span>Data Admin</span></a>
       </li>
+
       <li class="nav-item">
           <a class="nav-link" href="http://localhost/siprestasi/admin/prestasi/index.php">
               <i class="fas fa-fw fa-trophy"></i>

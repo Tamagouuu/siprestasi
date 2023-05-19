@@ -3,8 +3,7 @@ include '../../config.php';
 include '../../functions.php';
 guest_move_to_login();
 
-$data = query('SELECT * FROM tb_guru');
-
+$data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid = tb_lomba.lid WHERE ljenis = 1');
 
 ?>
 <!DOCTYPE html>
@@ -54,50 +53,38 @@ $data = query('SELECT * FROM tb_guru');
                     <?= flash() ?>
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Guru</h1>
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Prestasi Guru</h1>
                     </div>
-                    <a href="<?= BASE_URL ?>/admin/guru/create.php" class="btn btn-success btn-icon-split mb-4">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span class="text">Tambah Data</span>
-                    </a>
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Guru</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Prestasi</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Nama Guru</th>
-                                            <th>Kontak</th>
-                                            <th>Status</th>
+                                            <th>Nama </th>
+                                            <th>Peringkat</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nama Guru</th>
-                                            <th>Kontak</th>
-                                            <th>Status</th>
+                                            <th>Nama Lomba</th>
+                                            <th>Peringkat</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php foreach ($data as $d) : ?>
                                             <tr>
-                                                <td><?= $d['gnama'] ?></td>
-                                                <td><?= $d['gkontak'] ?></td>
-                                                <td><?= $d['gstatus'] == 1 ? 'Guru' : 'Non Guru' ?></td>
+                                                <td><?= $d['lnama'] ?></td>
+                                                <td><?= $d['pperingkat'] ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/guru/edit.php?gid=<?= $d['gid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/guru/delete.php?gid=<?= $d['gid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
-                                                        <i class="fas fa-trash"></i>
+                                                    <a href="<?= BASE_URL ?>/admin/prestasi/tambah-prestasi-guru.php?pid=<?= $d['pid'] ?>" class=" btn btn-primary btn-sm my-1">
+                                                        Tambah Prestasi
                                                     </a>
                                                 </td>
                                             </tr>

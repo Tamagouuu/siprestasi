@@ -6,4 +6,4 @@
 [x] Siswa
 [x] Kelas
 [x] Guru
-[] Admin
+[x] Admin

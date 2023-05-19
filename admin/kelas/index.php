@@ -100,6 +100,9 @@ $data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_t
                                                     <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/kelas/delete.php?kid=<?= $d['kid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
+                                                    <a href="<?= BASE_URL ?>/admin/kelas/tambah-peserta-kelas.php?kid=<?= $d['kid'] ?>" class=" btn btn-primary btn-circle btn-sm my-1">
+                                                        <i class="fas fa-plus"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

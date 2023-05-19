@@ -74,8 +74,8 @@ if (isset($_POST['submit'])) {
                         <div class="mb-3">
                             <label for="gstatus" class="form-label">Status</label>
                             <select name="gstatus" id="gstatus" class="form-control">
-                                <option value="1" <?= $guru['gstatus'] == 1 ? 'selected' : '' ?>>1</option>
-                                <option value="2" <?= $guru['gstatus'] == 2 ? 'selected' : '' ?>>2</option>
+                                <option value="1" <?= $guru['gstatus'] == 1 ? 'selected' : '' ?>>Guru</option>
+                                <option value="2" <?= $guru['gstatus'] == 2 ? 'selected' : '' ?>>Non Guru</option>
                             </select>
                         </div>
                         <div>

@@ -1,10 +1,28 @@
 <?php
-include '../../config.php';
-include '../../functions.php';
+require '../../config.php';
+require '../../functions.php';
+
 guest_move_to_login();
 
-$data = query('SELECT * FROM tb_guru');
+// $lomba = query("SELECT * FROM tb_lomba");
+$kelas = query("SELECT * FROM `tb_kelas` WHERE kid = {$_GET['kid']}")[0];
+$siswa_tersedia = query("SELECT tb_ref_kelas_siswa.kid, tb_siswa.* FROM `tb_ref_kelas_siswa` RIGHT JOIN tb_siswa ON tb_siswa.sid = tb_ref_kelas_siswa.sid WHERE tb_ref_kelas_siswa.kid IS NULL");
 
+$siswa_terdaftar = query("SELECT tb_ref_kelas_siswa.kid, tb_siswa.* FROM `tb_ref_kelas_siswa` JOIN tb_siswa ON tb_siswa.sid = tb_ref_kelas_siswa.sid WHERE tb_ref_kelas_siswa.kid = {$_GET['kid']}");
+
+
+if (isset($_POST['submit'])) {
+
+    $id_kelas = $_POST['kid'];
+    $id_siswa = $_POST['sid'];
+    mysqli_query($conn, "INSERT INTO tb_ref_kelas_siswa VALUES ('$id_kelas', '$id_siswa')");
+
+
+    set_flash('success', 'Berhasil membuat data peserta kelas!');
+
+    header("Refresh:0");
+    die;
+}
 
 ?>
 <!DOCTYPE html>
@@ -28,7 +46,6 @@ $data = query('SELECT * FROM tb_guru');
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-
 </head>
 
 <body id="page-top">
@@ -48,55 +65,59 @@ $data = query('SELECT * FROM tb_guru');
 
                 <?php require_once "../partial/topbar.php" ?>
 
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                    <h4 class="font-weight-bold">Kelas</h4>
                     <?= flash() ?>
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Guru</h1>
-                    </div>
-                    <a href="<?= BASE_URL ?>/admin/guru/create.php" class="btn btn-success btn-icon-split mb-4">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span class="text">Tambah Data</span>
-                    </a>
-                    <!-- Content Row -->
-                    <div class="card shadow mb-4">
+
+                    <form method="post" class="card p-3" id="form-prestasi">
+                        <div class="mb-3">
+                            <label for="lid" class="form-label">Kelas</label>
+                            <select name="kid" id="kid" class="form-control" readonly>
+                                <option value="<?= $kelas['kid'] ?>"><?= $kelas['knama'] ?></option>
+                            </select>
+                        </div>
+                        <div class="mb-3" id="input-wrapper">
+                            <label for="sid" class="form-label">Siswa</label>
+                            <select id="sid" class="form-control" name="sid">
+                                <?php foreach ($siswa_tersedia as $option) : ?>
+                                    <option value="<?= $option['sid'] ?>"><?= $option['snama'] ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div>
+                            <button class="btn btn-success" name="submit">Simpan Data</button>
+                        </div>
+                    </form>
+                    <div class="card shadow mt-3">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Guru</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Peserta Kelas</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Nama Guru</th>
-                                            <th>Kontak</th>
-                                            <th>Status</th>
+                                            <th>NIS</th>
+                                            <th>Nama Siswa</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nama Guru</th>
-                                            <th>Kontak</th>
-                                            <th>Status</th>
+                                            <th>NIS</th>
+                                            <th>Nama Siswa</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php foreach ($data as $d) : ?>
+                                        <?php foreach ($siswa_terdaftar as $d) : ?>
                                             <tr>
-                                                <td><?= $d['gnama'] ?></td>
-                                                <td><?= $d['gkontak'] ?></td>
-                                                <td><?= $d['gstatus'] == 1 ? 'Guru' : 'Non Guru' ?></td>
+                                                <td><?= $d['sid'] ?></td>
+                                                <td><?= $d['snama'] ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/guru/edit.php?gid=<?= $d['gid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/guru/delete.php?gid=<?= $d['gid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/kelas/delete-peserta-kelas.php?kid=<?= $_GET['kid'] ?>&sid=<?= $d['sid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -107,9 +128,6 @@ $data = query('SELECT * FROM tb_guru');
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -150,8 +168,12 @@ $data = query('SELECT * FROM tb_guru');
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("table.display").DataTable();
 
+        });
+    </script>
 </body>
 
 </html>

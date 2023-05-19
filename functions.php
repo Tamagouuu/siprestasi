@@ -119,3 +119,40 @@ function getCountData($tabel)
 
 	return $data['jmlData'];
 }
+
+function upload($name)
+{
+
+	$fileName = $_FILES["$name"]['name'];
+	$fileSize = $_FILES["$name"]['size'];
+	$error = $_FILES["$name"]['error'];
+	$tmpName = $_FILES["$name"]['tmp_name'];
+
+	// if there's no image, use default image
+	if ($error === 4) {
+		return false;
+	}
+
+	$allowedExtension = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'jfif', 'webp', 'pdf'];
+	$imageExtension = explode('.', $fileName);
+	$imageExtension = strtolower(end($imageExtension));
+
+	if (!in_array($imageExtension, $allowedExtension)) {
+		echo "<script>alert('yang anda upload tidak sesuai dengan format')</script>";
+		return false;
+	}
+
+	if ($fileSize > 50000000) {
+		echo "<script>alert('ukuran gambar terlalu besar')</script>";
+		return false;
+	}
+
+	$newFileName = uniqid();
+	$newFileName .= '.';
+
+	$newFileName .= $imageExtension;
+
+	move_uploaded_file($tmpName, "../../document/piagam/" . $newFileName);
+
+	return $newFileName;
+}

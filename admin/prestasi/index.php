@@ -55,12 +55,12 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                    <?= flash() ?>
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Prestasi</h1>
                     </div>
-                    <a href="<?= BASE_URL ?>/admin/lomba/create.php" class="btn btn-success btn-icon-split mb-4">
+                    <a href="<?= BASE_URL ?>/admin/prestasi/create.php" class="btn btn-success btn-icon-split mb-4">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
@@ -76,7 +76,7 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Nama Lomba</th>
+                                            <th>Nama </th>
                                             <th>Peringkat</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -94,11 +94,14 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
                                                 <td><?= $d['lnama'] ?></td>
                                                 <td><?= $d['pperingkat'] ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?pid=<?= $d['pid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/prestasi/edit.php?pid=<?= $d['pid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?pid=<?= $d['pid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/prestasi/delete.php?pid=<?= $d['pid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
+                                                    </a>
+                                                    <a href="<?= BASE_URL ?>/admin/prestasi/tambah-prestasi-<?= $d['ljenis'] == 1 ? 'guru' : 'siswa' ?>.php?pid=<?= $d['pid'] ?>" class=" btn btn-primary btn-circle btn-sm my-1">
+                                                        <i class="fas fa-plus"></i>
                                                     </a>
                                                 </td>
                                             </tr>

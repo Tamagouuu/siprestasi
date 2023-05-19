@@ -1,10 +1,41 @@
 <?php
-include '../../config.php';
-include '../../functions.php';
+require '../../config.php';
+require '../../functions.php';
+
 guest_move_to_login();
 
-$data = query('SELECT * FROM tb_guru');
+// $lomba = query("SELECT * FROM tb_lomba");
+$prestasi = query("SELECT * FROM `tb_prestasi` JOIN tb_lomba ON tb_lomba.lid = tb_prestasi.lid WHERE pid = {$_GET['pid']}")[0];
 
+$guru = query("SELECT * FROM `tb_guru`");
+
+
+$prestasi_guru_tersedia = query("SELECT * FROM `tb_ref_prestasi_guru` JOIN tb_guru ON tb_guru.gid = tb_ref_prestasi_guru.gid WHERE tb_ref_prestasi_guru.pid = {$_GET['pid']}");
+
+$idGuruBerprestasi = [];
+
+foreach ($prestasi_guru_tersedia as $g) {
+    $idGuruBerprestasi[] = $g['gid'];
+}
+
+foreach ($guru as $key => $g) {
+    if (in_array($g['gid'], $idGuruBerprestasi)) {
+        unset($guru[$key]);
+    }
+}
+
+if (isset($_POST['submit'])) {
+
+    $id_prestasi = $_POST['pid'];
+    $id_guru = $_POST['gid'];
+    mysqli_query($conn, "INSERT INTO tb_ref_prestasi_guru VALUES ('$id_prestasi', '$id_guru')");
+
+
+    set_flash('success', 'Berhasil membuat data prestasi!');
+
+    header("Refresh:0");
+    die;
+}
 
 ?>
 <!DOCTYPE html>
@@ -28,7 +59,6 @@ $data = query('SELECT * FROM tb_guru');
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-
 </head>
 
 <body id="page-top">
@@ -48,57 +78,62 @@ $data = query('SELECT * FROM tb_guru');
 
                 <?php require_once "../partial/topbar.php" ?>
 
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                    <h4 class="font-weight-bold">Prestasi</h4>
                     <?= flash() ?>
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Guru</h1>
-                    </div>
-                    <a href="<?= BASE_URL ?>/admin/guru/create.php" class="btn btn-success btn-icon-split mb-4">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span class="text">Tambah Data</span>
-                    </a>
-                    <!-- Content Row -->
-                    <div class="card shadow mb-4">
+
+                    <form method="post" class="card p-3" id="form-prestasi">
+                        <div class="mb-3">
+                            <label for="lid" class="form-label">Lomba</label>
+                            <select name="pid" id="pid" class="form-control" readonly>
+                                <option value="<?= $prestasi['pid'] ?>"><?= $prestasi['lnama'] ?></option>
+                            </select>
+                        </div>
+                        <div class="mb-3" id="input-wrapper">
+                            <label for="gid" class="form-label">Guru</label>
+                            <select id="gid" class="form-control" name="gid">
+                                <?php foreach ($guru as $option) : ?>
+                                    <option value="<?= $option['gid'] ?>"><?= $option['gnama'] ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div>
+                            <button class="btn btn-success" name="submit">Simpan Data</button>
+                        </div>
+                    </form>
+                    <div class="card shadow mt-3">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Guru</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Guru Berprestasi</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Nama Guru</th>
-                                            <th>Kontak</th>
-                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Nama Guru</th>
-                                            <th>Kontak</th>
-                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php foreach ($data as $d) : ?>
+                                        <?php foreach ($prestasi_guru_tersedia as $d) : ?>
                                             <tr>
+                                                <td><?= $d['gid'] ?></td>
                                                 <td><?= $d['gnama'] ?></td>
-                                                <td><?= $d['gkontak'] ?></td>
-                                                <td><?= $d['gstatus'] == 1 ? 'Guru' : 'Non Guru' ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/guru/edit.php?gid=<?= $d['gid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/guru/delete.php?gid=<?= $d['gid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/prestasi/delete-prestasi-guru.php?gid=<?= $d['gid'] ?>&pid=<?= $_GET['pid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
+
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -107,9 +142,6 @@ $data = query('SELECT * FROM tb_guru');
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -150,8 +182,12 @@ $data = query('SELECT * FROM tb_guru');
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("table.display").DataTable();
 
+        });
+    </script>
 </body>
 
 </html>

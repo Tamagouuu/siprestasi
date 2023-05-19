@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
                             <select name="ltingkat" id="ltingkat" class="form-control">
                                 <?php foreach ($tingkat_option as $option) : ?>
                                     <option value="<?= $option ?>">
-                                        <?= $option ?>
+                                        <?= ucwords($option) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>

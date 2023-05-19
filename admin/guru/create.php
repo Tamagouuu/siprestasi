@@ -73,8 +73,8 @@ if (isset($_POST['submit'])) {
                         <div class="mb-3">
                             <label for="gstatus" class="form-label">Status</label>
                             <select name="gstatus" id="gstatus" class="form-control">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
+                                <option value="1">Guru</option>
+                                <option value="2">Non Guru</option>
                             </select>
                         </div>
                         <div>
