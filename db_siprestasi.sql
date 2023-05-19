@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 18, 2023 at 08:53 AM
+-- Generation Time: May 19, 2023 at 11:48 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -87,8 +87,7 @@ CREATE TABLE `tb_kelas` (
 INSERT INTO `tb_kelas` (`kid`, `knama`, `ktingkat`, `tid`) VALUES
 (1, 'XII RPL 1', '12', 5),
 (2, 'XII RPL 2', '12', 5),
-(4, 'XII TPTU', '12', 5),
-(5, 'XII DPIB 1', '12', 5);
+(5, 'XII DPIB 2', '12', 5);
 
 -- --------------------------------------------------------
 
@@ -114,9 +113,7 @@ INSERT INTO `tb_lomba` (`lid`, `ljenis`, `lnama`, `ltingkat`, `lpenyelenggara`, 
 (1, '2', 'Cerdas Cermat Pengetahuan Umum SMA/SMK', 'provinsi', 'Universitas Pendidikan Nasional', 2023, 5),
 (2, '2', 'Cerdas Cermat IT SMA/SMK', 'provinsi', 'Institut Desain Bali ', 2023, 5),
 (3, '2', 'Lomba Keterampilan Siswa (LKS) Bidang Lomba IT Software Solution for Business', 'nasional', 'Pusat Prestasi Nasional Kemdikbud', 2022, 5),
-(4, '2', 'Lomba Keterampilan Siswa (LKS) Bidang Lomba Web Technology', 'nasional', 'Pusat Prestasi Nasional Kemdikbud', 2022, 5),
-(5, '2', 'Lomba Keterampilan Siswa (LKS) Bidang Lomba Refregeration', 'nasional', 'Pusat Prestasi Nasional Kemdikbud', 2022, 5),
-(6, '2', 'Lomba Keterampilan Siswa (LKS) Bidang Lomba CADD Building', 'nasional', 'Pusat Prestasi Nasional Kemdikbud', 2022, 5);
+(5, '2', 'Lomba Keterampilan Siswa (LKS) Bidang Lomba Refregeration', 'nasional', 'Pusat Prestasi Nasional Kemdikbud', 2022, 5);
 
 -- --------------------------------------------------------
 
@@ -136,11 +133,10 @@ CREATE TABLE `tb_prestasi` (
 --
 
 INSERT INTO `tb_prestasi` (`pid`, `lid`, `pperingkat`, `pdokumen`) VALUES
-(1, 1, 'Juara I', ''),
+(1, 1, 'Juara I', NULL),
 (2, 2, 'Juara I', NULL),
 (3, 2, 'Juara II', NULL),
-(4, 3, 'Juara II', NULL),
-(5, 4, 'Juara I', NULL);
+(4, 3, 'Juara II', NULL);
 
 -- --------------------------------------------------------
 
@@ -165,8 +161,7 @@ INSERT INTO `tb_ref_kelas_siswa` (`kid`, `sid`) VALUES
 (1, '28853'),
 (1, '28861'),
 (2, '28888'),
-(2, '28890'),
-(4, '28489');
+(2, '28890');
 
 -- --------------------------------------------------------
 
@@ -198,9 +193,7 @@ INSERT INTO `tb_ref_prestasi_pemb` (`pid`, `gid`) VALUES
 (1, 1),
 (2, 1),
 (3, 1),
-(4, 2),
-(5, 3),
-(5, 1);
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -227,8 +220,7 @@ INSERT INTO `tb_ref_prestasi_siswa` (`pid`, `sid`) VALUES
 (3, '28833'),
 (3, '28847'),
 (3, '28872'),
-(4, '28888'),
-(5, '28890');
+(4, '28888');
 
 -- --------------------------------------------------------
 
@@ -255,7 +247,8 @@ INSERT INTO `tb_siswa` (`sid`, `snama`, `sgender`) VALUES
 ('28861', 'MOCH. RIFKY SULTON AKBAR', 'L'),
 ('28872', 'PUTU WIDYA RUSMANANDA YASA', 'L'),
 ('28888', 'I MADE ADNYA SUTHA WIRYA', 'L'),
-('28890', 'I MADE GAUTAMA ', 'L');
+('28890', 'I MADE GAUTAMA ', 'L'),
+('28891', 'I MADE PALGUNA WIDIARSANA', 'L');
 
 -- --------------------------------------------------------
 
@@ -287,7 +280,8 @@ INSERT INTO `tb_tapel` (`tid`, `ttapel`) VALUES
 -- Indexes for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  ADD PRIMARY KEY (`aid`);
+  ADD PRIMARY KEY (`aid`),
+  ADD UNIQUE KEY `ausername` (`ausername`);
 
 --
 -- Indexes for table `tb_guru`
@@ -364,31 +358,31 @@ ALTER TABLE `tb_tapel`
 -- AUTO_INCREMENT for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `aid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `aid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_guru`
 --
 ALTER TABLE `tb_guru`
-  MODIFY `gid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `gid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
-  MODIFY `kid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `kid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_lomba`
 --
 ALTER TABLE `tb_lomba`
-  MODIFY `lid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `lid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_prestasi`
 --
 ALTER TABLE `tb_prestasi`
-  MODIFY `pid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `pid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_tapel`
@@ -410,40 +404,40 @@ ALTER TABLE `tb_kelas`
 -- Constraints for table `tb_lomba`
 --
 ALTER TABLE `tb_lomba`
-  ADD CONSTRAINT `tb_lomba_ibfk_1` FOREIGN KEY (`tid`) REFERENCES `tb_tapel` (`tid`);
+  ADD CONSTRAINT `tb_lomba_ibfk_1` FOREIGN KEY (`tid`) REFERENCES `tb_tapel` (`tid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_prestasi`
 --
 ALTER TABLE `tb_prestasi`
-  ADD CONSTRAINT `tb_prestasi_ibfk_1` FOREIGN KEY (`lid`) REFERENCES `tb_lomba` (`lid`);
+  ADD CONSTRAINT `tb_prestasi_ibfk_1` FOREIGN KEY (`lid`) REFERENCES `tb_lomba` (`lid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_ref_kelas_siswa`
 --
 ALTER TABLE `tb_ref_kelas_siswa`
-  ADD CONSTRAINT `tb_ref_kelas_siswa_ibfk_1` FOREIGN KEY (`kid`) REFERENCES `tb_kelas` (`kid`),
+  ADD CONSTRAINT `tb_ref_kelas_siswa_ibfk_1` FOREIGN KEY (`kid`) REFERENCES `tb_kelas` (`kid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_ref_kelas_siswa_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `tb_siswa` (`sid`);
 
 --
 -- Constraints for table `tb_ref_prestasi_guru`
 --
 ALTER TABLE `tb_ref_prestasi_guru`
-  ADD CONSTRAINT `tb_ref_prestasi_guru_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `tb_prestasi` (`pid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `tb_ref_prestasi_guru_ibfk_2` FOREIGN KEY (`gid`) REFERENCES `tb_guru` (`gid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `tb_ref_prestasi_guru_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `tb_prestasi` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_ref_prestasi_guru_ibfk_2` FOREIGN KEY (`gid`) REFERENCES `tb_guru` (`gid`);
 
 --
 -- Constraints for table `tb_ref_prestasi_pemb`
 --
 ALTER TABLE `tb_ref_prestasi_pemb`
-  ADD CONSTRAINT `tb_ref_prestasi_pemb_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `tb_prestasi` (`pid`),
+  ADD CONSTRAINT `tb_ref_prestasi_pemb_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `tb_prestasi` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_ref_prestasi_pemb_ibfk_2` FOREIGN KEY (`gid`) REFERENCES `tb_guru` (`gid`);
 
 --
 -- Constraints for table `tb_ref_prestasi_siswa`
 --
 ALTER TABLE `tb_ref_prestasi_siswa`
-  ADD CONSTRAINT `tb_ref_prestasi_siswa_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `tb_prestasi` (`pid`),
+  ADD CONSTRAINT `tb_ref_prestasi_siswa_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `tb_prestasi` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_ref_prestasi_siswa_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `tb_siswa` (`sid`);
 COMMIT;
 
