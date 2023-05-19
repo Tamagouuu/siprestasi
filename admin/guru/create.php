@@ -5,11 +5,13 @@ require '../../functions.php';
 guest_move_to_login();
 
 if (isset($_POST['submit'])) {
-    $tahun = mysqli_escape_string($conn, $_POST['ttapel']);
+    $gnama = mysqli_escape_string($conn, $_POST['gnama']);
+    $gkontak = mysqli_escape_string($conn, $_POST['gkontak']);
+    $gstatus = mysqli_escape_string($conn, $_POST['gstatus']);
 
-    $q = mysqli_query($conn, "INSERT INTO tb_tapel VALUES (null, '$tahun')");
+    $q = mysqli_query($conn, "INSERT INTO tb_guru VALUES (null, '$gnama', null, '$gkontak', '$gstatus')");
 
-    set_flash('success', 'Berhasil membuat data tahun pelajaran!');
+    set_flash('success', 'Berhasil membuat data guru!');
 
     header('location: index.php');
     die;
@@ -61,8 +63,19 @@ if (isset($_POST['submit'])) {
                     <h4 class="font-weight-bold">Tambah Data</h4>
                     <form method="post" class="card p-3">
                         <div class="mb-3">
-                            <label for="ttapel" class="form-label">Tahun Pelajaran</label>
-                            <input name="ttapel" class="form-control" id="ttapel" />
+                            <label for="gnama" class="form-label">Nama Guru</label>
+                            <input name="gnama" class="form-control" id="gnama" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="gkontak" class="form-label">No. Kontak</label>
+                            <input name="gkontak" class="form-control" id="gkontak" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="gstatus" class="form-label">Status</label>
+                            <select name="gstatus" id="gstatus" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>

@@ -4,13 +4,17 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+$idSiswa = mysqli_escape_string($conn, $_GET['sid']);
+
+$siswa = query("SELECT * FROM tb_siswa WHERE sid = '$idSiswa'")[0] ?? null;
 if (isset($_POST['submit'])) {
-    $tahun = mysqli_escape_string($conn, $_POST['ttapel']);
+    $sid = mysqli_escape_string($conn, $_POST['sid']);
+    $snama = mysqli_escape_string($conn, $_POST['snama']);
+    $sgender = mysqli_escape_string($conn, $_POST['sgender']);
 
-    $q = mysqli_query($conn, "INSERT INTO tb_tapel VALUES (null, '$tahun')");
+    $q = mysqli_query($conn, "UPDATE tb_siswa SET sid = '$sid', snama = '$snama', sgender = '$sgender'  WHERE sid = '$idSiswa'");
 
-    set_flash('success', 'Berhasil membuat data tahun pelajaran!');
-
+    set_flash('success', 'Berhasil mengupdate data siswa!');
     header('location: index.php');
     die;
 }
@@ -57,12 +61,22 @@ if (isset($_POST['submit'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <h4 class="font-weight-bold">Tambah Data</h4>
+                    <h4 class="font-weight-bold">Edit Data</h4>
                     <form method="post" class="card p-3">
                         <div class="mb-3">
-                            <label for="ttapel" class="form-label">Tahun Pelajaran</label>
-                            <input name="ttapel" class="form-control" id="ttapel" />
+                            <label for="sid" class="form-label">NIS</label>
+                            <input name="sid" class="form-control" id="sid" value="<?= $siswa['sid'] ?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="snama" class="form-label">Nama Siswa</label>
+                            <input name="snama" class="form-control" id="snama" value="<?= $siswa['snama'] ?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="sgender" class="form-label">Jenis Kelamin</label>
+                            <select name="sgender" id="sgender" class="form-control">
+                                <option value="L" <?= $siswa['sgender'] == 'L' ? 'selected' : '' ?>>Laki-Laki</option>
+                                <option value="P" <?= $siswa['sgender'] == 'P' ? 'selected' : '' ?>>Perempuan</option>
+                            </select>
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>

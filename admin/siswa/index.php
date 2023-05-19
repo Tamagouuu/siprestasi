@@ -51,7 +51,7 @@ $data = query('SELECT * FROM tb_siswa');
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                    <?= flash(); ?>
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Siswa</h1>
@@ -90,10 +90,10 @@ $data = query('SELECT * FROM tb_siswa');
                                                 <td><?= $d['sid'] ?></td>
                                                 <td><?= ucfirst($d['snama']) ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?sid=<?= $d['sid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/siswa/edit.php?sid=<?= $d['sid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?sid=<?= $d['sid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/siswa/delete.php?sid=<?= $d['sid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>

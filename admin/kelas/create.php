@@ -4,12 +4,17 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+$tapel = query("SELECT * FROM tb_tapel");
+
+
 if (isset($_POST['submit'])) {
-    $tahun = mysqli_escape_string($conn, $_POST['ttapel']);
+    $knama = mysqli_escape_string($conn, $_POST['knama']);
+    $ktingkat = mysqli_escape_string($conn, $_POST['ktingkat']);
+    $tid = mysqli_escape_string($conn, $_POST['tid']);
 
-    $q = mysqli_query($conn, "INSERT INTO tb_tapel VALUES (null, '$tahun')");
+    $q = mysqli_query($conn, "INSERT INTO tb_kelas VALUES (null, '$knama', '$ktingkat', '$tid')");
 
-    set_flash('success', 'Berhasil membuat data tahun pelajaran!');
+    set_flash('success', 'Berhasil membuat data kelas!');
 
     header('location: index.php');
     die;
@@ -61,8 +66,26 @@ if (isset($_POST['submit'])) {
                     <h4 class="font-weight-bold">Tambah Data</h4>
                     <form method="post" class="card p-3">
                         <div class="mb-3">
-                            <label for="ttapel" class="form-label">Tahun Pelajaran</label>
-                            <input name="ttapel" class="form-control" id="ttapel" />
+                            <label for="knama" class="form-label">Nama Kelas</label>
+                            <input name="knama" class="form-control" id="knama" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="ktingkat" class="form-label">Tingkat</label>
+                            <select name="ktingkat" id="ktingkat" class="form-control">>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tid" class="form-label">Tahun Pelajaran</label>
+                            <select name="tid" id="tid" class="form-control">
+                                <?php foreach ($tapel as $option) : ?>
+                                    <option value="<?= $option['tid'] ?>">
+                                        <?= $option['ttapel'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>

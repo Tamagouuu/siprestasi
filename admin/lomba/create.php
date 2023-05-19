@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
         VALUES ('$jenis','$nama','$tingkat','$penyelenggara','$tahun','$tapel_id')
     ");
 
-    set_flash('success','Berhasil membuat data lomba!');
+    set_flash('success', 'Berhasil membuat data lomba!');
 
     header('location: index.php');
     die;
@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h4>Tambah Data</h4>
+                    <h4 class="font-weight-bold">Tambah Data</h4>
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="lnama" class="form-label">Nama Lomba</label>

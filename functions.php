@@ -17,14 +17,14 @@ function query($query)
 
 function redirect($url)
 {
-	$url = ltrim($url,'/');
+	$url = ltrim($url, '/');
 	header('location:' . BASE_URL . '/' . $url);
 	die;
 }
 
 function guest_move_to_login()
 {
-	if (! isset($_SESSION['user'])) {
+	if (!isset($_SESSION['user'])) {
 		redirect('login.php');
 	}
 }
@@ -44,7 +44,7 @@ function get_login_account()
 function get_tingkat_lomba_option()
 {
 	return [
-		'kota/kabupaten','provinsi','nasional','regional','internasional','lainnya'
+		'kota/kabupaten', 'provinsi', 'nasional', 'regional', 'internasional', 'lainnya'
 	];
 }
 
@@ -60,8 +60,8 @@ function login($username, $password)
 {
 	global $conn;
 	$username = mysqli_real_escape_string($conn, $username);
-    $password = mysqli_real_escape_string($conn, $password);
-	
+	$password = mysqli_real_escape_string($conn, $password);
+
 	$admin = query("SELECT * FROM tb_admin WHERE ausername = '$username' AND apassword = '$password'")[0] ?? null;
 
 	if ($admin != null) {
@@ -77,7 +77,6 @@ function login($username, $password)
 	}
 
 	return null;
-	
 }
 
 function dd($var)
@@ -88,8 +87,8 @@ function dd($var)
 
 function reopen_page()
 {
-	header('location: '. $_SERVER['REQUEST_URI']);
-    die;
+	header('location: ' . $_SERVER['REQUEST_URI']);
+	die;
 }
 
 function set_flash($bs_class, $message)
@@ -98,13 +97,12 @@ function set_flash($bs_class, $message)
 		'message' => $message,
 		'bs_class' => $bs_class
 	];
-
 }
 
 function flash()
 {
 	if (isset($_SESSION['flash'])) {
-		$flash_message= $_SESSION['flash']['message'];
+		$flash_message = $_SESSION['flash']['message'];
 		$bs_class = $_SESSION['flash']['bs_class'];
 		echo "
 			<div class='alert alert-$bs_class'>
@@ -113,4 +111,11 @@ function flash()
 		";
 		unset($_SESSION['flash']);
 	}
+}
+
+function getCountData($tabel)
+{
+	$data = query("SELECT COUNT(*) as jmlData FROM $tabel")[0] ?? null;
+
+	return $data['jmlData'];
 }

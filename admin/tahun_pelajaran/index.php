@@ -51,10 +51,11 @@ $data = query('SELECT * FROM tb_tapel');
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <?= flash(); ?>
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Siswa</h1>
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Tahun Pelajaran</h1>
                     </div>
                     <a href="<?= BASE_URL ?>/admin/tahun_pelajaran/create.php" class="btn btn-success btn-icon-split mb-4">
                         <span class="icon text-white-50">
@@ -87,10 +88,10 @@ $data = query('SELECT * FROM tb_tapel');
                                             <tr>
                                                 <td><?= $d['ttapel'] ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/edit.php?tid=<?= $d['tid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/tahun_pelajaran/edit.php?tid=<?= $d['tid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?tid=<?= $d['tid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/tahun_pelajaran/delete.php?tid=<?= $d['tid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>

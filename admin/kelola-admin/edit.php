@@ -4,13 +4,18 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+$idAdmin = mysqli_escape_string($conn, $_GET['aid']);
+
+$admin = query("SELECT * FROM tb_admin WHERE aid = '$idAdmin'")[0] ?? null;
 if (isset($_POST['submit'])) {
-    $tahun = mysqli_escape_string($conn, $_POST['ttapel']);
+    $ausername = mysqli_escape_string($conn, $_POST['ausername']);
+    $apassword = mysqli_escape_string($conn, $_POST['apassword']);
+    $anama = mysqli_escape_string($conn, $_POST['anama']);
+    $ajabatan = mysqli_escape_string($conn, $_POST['ajabatan']);
 
-    $q = mysqli_query($conn, "INSERT INTO tb_tapel VALUES (null, '$tahun')");
+    $q = mysqli_query($conn, "UPDATE tb_admin SET ausername = '$ausername', apassword = '$apassword', anama = '$anama', ajabatan = '$ajabatan'  WHERE aid = '$idAdmin'");
 
-    set_flash('success', 'Berhasil membuat data tahun pelajaran!');
-
+    set_flash('success', 'Berhasil mengupdate data guru!');
     header('location: index.php');
     die;
 }
@@ -57,13 +62,25 @@ if (isset($_POST['submit'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <h4 class="font-weight-bold">Tambah Data</h4>
+                    <h4 class="font-weight-bold">Edit Data</h4>
                     <form method="post" class="card p-3">
                         <div class="mb-3">
-                            <label for="ttapel" class="form-label">Tahun Pelajaran</label>
-                            <input name="ttapel" class="form-control" id="ttapel" />
+                            <label for="ausername" class="form-label">Username</label>
+                            <input name="ausername" class="form-control" id="ausername" value="<?= $admin['ausername'] ?>" />
                         </div>
+                        <div class="mb-3">
+                            <label for="apassword" class="form-label">Password</label>
+                            <input name="apassword" class="form-control" type="password" id="apassword" value="<?= $admin['apassword'] ?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="anama" class="form-label">Nama Admin</label>
+                            <input name="anama" class="form-control" id="anama" value="<?= $admin['anama'] ?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="ajabatan" class="form-label">Jabatan</label>
+                            <input name="ajabatan" class="form-control" id="ajabatan" value="<?= $admin['ajabatan'] ?>" />
+                        </div>
+
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>
                         </div>

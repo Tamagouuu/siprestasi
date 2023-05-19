@@ -49,7 +49,7 @@ guest_move_to_login();
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Dashboard</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -62,11 +62,107 @@ guest_move_to_login();
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                                Data Prestasi</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= getCountData('tb_prestasi') ?></div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas fa-trophy fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Data Lomba</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= getCountData('tb_lomba') ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-medal fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Data Guru</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= getCountData('tb_guru') ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Data Kelas</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= getCountData('tb_kelas') ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-door-open fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Data Siswa</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= getCountData('tb_siswa') ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Data Tahun Pelajaran</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= getCountData('tb_tapel') ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Data Admin</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= getCountData('tb_admin') ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user-cog fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

@@ -4,13 +4,16 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+$idTapel = mysqli_escape_string($conn, $_GET['tid']);
+
+$dataTapel = query("SELECT * FROM tb_tapel WHERE tid = '$idTapel'")[0] ?? null;
 if (isset($_POST['submit'])) {
-    $tahun = mysqli_escape_string($conn, $_POST['ttapel']);
+    $tapel = mysqli_escape_string($conn, $_POST['ttapel']);
 
-    $q = mysqli_query($conn, "INSERT INTO tb_tapel VALUES (null, '$tahun')");
 
-    set_flash('success', 'Berhasil membuat data tahun pelajaran!');
+    $q = mysqli_query($conn, "UPDATE tb_tapel SET ttapel = '$tapel' WHERE tid = '$idTapel'");
 
+    set_flash('success', 'Berhasil mengupdate data tahun pelajaran!');
     header('location: index.php');
     die;
 }
@@ -57,12 +60,11 @@ if (isset($_POST['submit'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <h4 class="font-weight-bold">Tambah Data</h4>
+                    <h4 class="font-weight-bold">Edit Data</h4>
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="ttapel" class="form-label">Tahun Pelajaran</label>
-                            <input name="ttapel" class="form-control" id="ttapel" />
+                            <input name="ttapel" class="form-control" id="ttapel" value="<?= $dataTapel['ttapel'] ?>" />
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>

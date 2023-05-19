@@ -28,6 +28,11 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
+          <a class="nav-link" href="http://localhost/siprestasi/admin/kelola-admin/index.php">
+              <i class="fas fa-fw fa-user-cog"></i>
+              <span>Data Admin</span></a>
+      </li>
+      <li class="nav-item">
           <a class="nav-link" href="http://localhost/siprestasi/admin/prestasi/index.php">
               <i class="fas fa-fw fa-trophy"></i>
               <span>Data Prestasi</span></a>
@@ -44,12 +49,12 @@
       </li>
       <li class="nav-item">
           <a class="nav-link" href="http://localhost/siprestasi/admin/kelas/index.php">
-              <i class="fas fa-fw fa-table"></i>
+              <i class="fas fa-fw fa-door-open"></i>
               <span>Data Kelas</span></a>
       </li>
       <li class="nav-item">
           <a class="nav-link" href="http://localhost/siprestasi/admin/siswa/index.php">
-              <i class="fas fa-fw fa-door-open"></i>
+              <i class="fas fa-fw fa-user"></i>
               <span>Data Siswa</span></a>
       </li>
       <li class="nav-item">

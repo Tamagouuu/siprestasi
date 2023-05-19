@@ -19,12 +19,13 @@ if (isset($_POST['submit'])) {
     $tapel_id = mysqli_escape_string($conn, $_POST['tid']);
 
     $q = mysqli_query($conn, "UPDATE tb_lomba SET 
-        ljenis = '$jenis',
-        lnama = '$nama',
-        ltingkat = '$tingkat',
-        lpenyelenggara = '$penyelenggara',
-        ltahun = $tahun,
-        tid = '$tapel_id'
+    ljenis = '$jenis',
+    lnama = '$nama',
+    ltingkat = '$tingkat',
+    lpenyelenggara = '$penyelenggara',
+    ltahun = $tahun,
+    tid = '$tapel_id'
+    WHERE lid = $idLomba
     ");
 
     set_flash('success', 'Berhasil mengupdate data lomba!');
@@ -74,7 +75,7 @@ if (isset($_POST['submit'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h4>Edit Lomba</h4>
+                    <h4 class="font-weight-bold">Edit Lomba</h4>
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="lnama" class="form-label">Nama Lomba</label>
@@ -119,7 +120,7 @@ if (isset($_POST['submit'])) {
                             <input name="lpenyelenggara" class="form-control" id="lpenyelenggara" value="<?= $lomba['lpenyelenggara'] ?>" />
                         </div>
                         <div>
-                            <button class="btn btn-success" name="submit">Simpan Lomba</button>
+                            <button class="btn btn-success" name="submit">Simpan Data</button>
                         </div>
                     </form>
                 </div>

@@ -51,7 +51,7 @@ $data = query('SELECT * FROM tb_lomba INNER JOIN tb_tapel ON tb_lomba.tid = tb_t
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <?= flash();?>
+                    <?= flash(); ?>
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Lomba</h1>
@@ -105,7 +105,7 @@ $data = query('SELECT * FROM tb_lomba INNER JOIN tb_tapel ON tb_lomba.tid = tb_t
                                                     <a href="<?= BASE_URL ?>/admin/lomba/edit.php?lid=<?= $d['lid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL ?>/admin/lomba/delete.php?lid=<?= $d['lid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/lomba/delete.php?lid=<?= $d['lid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>

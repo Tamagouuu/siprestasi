@@ -3,9 +3,8 @@ include '../../config.php';
 include '../../functions.php';
 guest_move_to_login();
 
-$data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_tapel.tid');
+$data = query('SELECT * FROM tb_admin');
 
-// dd($data);
 
 ?>
 <!DOCTYPE html>
@@ -52,12 +51,12 @@ $data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_t
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <?= flash(); ?>
+                    <?= flash() ?>
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Kelas</h1>
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Admin</h1>
                     </div>
-                    <a href="<?= BASE_URL ?>/admin/kelas/create.php" class="btn btn-success btn-icon-split mb-4">
+                    <a href="<?= BASE_URL ?>/admin/kelola-admin/create.php" class="btn btn-success btn-icon-split mb-4">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
@@ -66,38 +65,38 @@ $data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_t
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Kelas</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Admin</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Nama Kelas</th>
-                                            <th>Tingkat</th>
-                                            <th>Tahun Ajaran</th>
+                                            <th>Username</th>
+                                            <th>Nama Admin</th>
+                                            <th>Jabatan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nama Kelas</th>
-                                            <th>Tingkat</th>
-                                            <th>Tahun Ajaran</th>
+                                            <th>Username</th>
+                                            <th>Nama Admin</th>
+                                            <th>Jabatan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php foreach ($data as $d) : ?>
                                             <tr>
-                                                <td><?= $d['knama'] ?></td>
-                                                <td><?= $d['ktingkat'] ?></td>
-                                                <td><?= $d['ttapel'] ?></td>
+                                                <td><?= $d['ausername'] ?></td>
+                                                <td><?= $d['anama'] ?></td>
+                                                <td><?= $d['ajabatan'] ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/kelas/edit.php?kid=<?= $d['kid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
+                                                    <a href="<?= BASE_URL ?>/admin/kelola-admin/edit.php?aid=<?= $d['aid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/kelas/delete.php?kid=<?= $d['kid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/kelola-admin/delete.php?aid=<?= $d['aid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>

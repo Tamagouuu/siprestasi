@@ -4,13 +4,17 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+$idGuru = mysqli_escape_string($conn, $_GET['gid']);
+
+$guru = query("SELECT * FROM tb_guru WHERE gid = '$idGuru'")[0] ?? null;
 if (isset($_POST['submit'])) {
-    $tahun = mysqli_escape_string($conn, $_POST['ttapel']);
+    $gnama = mysqli_escape_string($conn, $_POST['gnama']);
+    $gkontak = mysqli_escape_string($conn, $_POST['gkontak']);
+    $gstatus = mysqli_escape_string($conn, $_POST['gstatus']);
 
-    $q = mysqli_query($conn, "INSERT INTO tb_tapel VALUES (null, '$tahun')");
+    $q = mysqli_query($conn, "UPDATE tb_guru SET gnama = '$gnama', gkontak = '$gkontak', gstatus = '$gstatus'  WHERE gid = '$idGuru'");
 
-    set_flash('success', 'Berhasil membuat data tahun pelajaran!');
-
+    set_flash('success', 'Berhasil mengupdate data guru!');
     header('location: index.php');
     die;
 }
@@ -57,12 +61,22 @@ if (isset($_POST['submit'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <h4 class="font-weight-bold">Tambah Data</h4>
+                    <h4 class="font-weight-bold">Edit Data</h4>
                     <form method="post" class="card p-3">
                         <div class="mb-3">
-                            <label for="ttapel" class="form-label">Tahun Pelajaran</label>
-                            <input name="ttapel" class="form-control" id="ttapel" />
+                            <label for="gnama" class="form-label">Nama Guru</label>
+                            <input name="gnama" class="form-control" id="gnama" value="<?= $guru['gnama'] ?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="gkontak" class="form-label">No. Kontak</label>
+                            <input name="gkontak" class="form-control" id="gkontak" value="<?= $guru['gkontak'] ?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="gstatus" class="form-label">Status</label>
+                            <select name="gstatus" id="gstatus" class="form-control">
+                                <option value="1" <?= $guru['gstatus'] == 1 ? 'selected' : '' ?>>1</option>
+                                <option value="2" <?= $guru['gstatus'] == 2 ? 'selected' : '' ?>>2</option>
+                            </select>
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>
