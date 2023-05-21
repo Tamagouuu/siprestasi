@@ -10,12 +10,19 @@ if (isset($_POST['submit'])) {
     $anama = mysqli_escape_string($conn, $_POST['anama']);
     $ajabatan = mysqli_escape_string($conn, $_POST['ajabatan']);
 
-    $q = mysqli_query($conn, "INSERT INTO tb_admin VALUES (null, '$ausername', '$apassword', '$anama', '$ajabatan')");
+    if (query("SELECT * FROM tb_admin WHERE ausername = '$ausername'")[0]) {
+        set_flash('danger', 'Username yang dimasukkan telah terdaftar pada data admin!');
+        header('location: index.php');
+        die;
+    } else {
 
-    set_flash('success', 'Berhasil membuat data admin!');
+        $q = mysqli_query($conn, "INSERT INTO tb_admin VALUES (null, '$ausername', '$apassword', '$anama', '$ajabatan')");
 
-    header('location: index.php');
-    die;
+        set_flash('success', 'Berhasil membuat data admin!');
+
+        header('location: index.php');
+        die;
+    }
 }
 
 ?>
@@ -65,19 +72,19 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="ausername" class="form-label">Username</label>
-                            <input name="ausername" class="form-control" id="ausername" />
+                            <input name="ausername" class="form-control" id="ausername" required />
                         </div>
                         <div class="mb-3">
                             <label for="apassword" class="form-label">Password</label>
-                            <input name="apassword" class="form-control" type="password" id="apassword" />
+                            <input name="apassword" class="form-control" type="password" id="apassword" required />
                         </div>
                         <div class="mb-3">
                             <label for="anama" class="form-label">Nama Admin</label>
-                            <input name="anama" class="form-control" id="anama" />
+                            <input name="anama" class="form-control" id="anama" required />
                         </div>
                         <div class="mb-3">
                             <label for="ajabatan" class="form-label">Jabatan</label>
-                            <input name="ajabatan" class="form-control" id="ajabatan" />
+                            <input name="ajabatan" class="form-control" id="ajabatan" required />
                         </div>
 
                         <div>

@@ -66,19 +66,19 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="ausername" class="form-label">Username</label>
-                            <input name="ausername" class="form-control" id="ausername" value="<?= $admin['ausername'] ?>" />
+                            <input name="ausername" class="form-control" id="ausername" value="<?= $admin['ausername'] ?>" required />
                         </div>
                         <div class="mb-3">
                             <label for="apassword" class="form-label">Password</label>
-                            <input name="apassword" class="form-control" type="password" id="apassword" value="<?= $admin['apassword'] ?>" />
+                            <input name="apassword" class="form-control" type="password" id="apassword" value="<?= $admin['apassword'] ?>" required />
                         </div>
                         <div class="mb-3">
                             <label for="anama" class="form-label">Nama Admin</label>
-                            <input name="anama" class="form-control" id="anama" value="<?= $admin['anama'] ?>" />
+                            <input name="anama" class="form-control" id="anama" value="<?= $admin['anama'] ?>" required />
                         </div>
                         <div class="mb-3">
                             <label for="ajabatan" class="form-label">Jabatan</label>
-                            <input name="ajabatan" class="form-control" id="ajabatan" value="<?= $admin['ajabatan'] ?>" />
+                            <input name="ajabatan" class="form-control" id="ajabatan" value="<?= $admin['ajabatan'] ?>" required />
                         </div>
 
                         <div>

@@ -29,6 +29,10 @@ $data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_t
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <style>
+
+    </style>
+
 
 </head>
 
@@ -81,8 +85,8 @@ $data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_t
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nama Kelas</th>
-                                            <th>Tingkat</th>
+                                            <th></th>
+                                            <th></th>
                                             <th>Tahun Ajaran</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -153,9 +157,74 @@ $data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_t
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
+    <!-- Page level custom scripts -->
+    <script>
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+            $("#dataTable").DataTable({
+                initComplete: function() {
+                    this.api()
+                        .columns([2, 3])
+                        .every(function() {
+                            var column = this;
+                            var select = $('<select class="form-control"><option value="">--- Filter Data ---</option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function() {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+
+                            column
+                                .data()
+                                .unique()
+                                .sort()
+                                .each(function(d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>');
+                                });
+                        });
+                },
+                dom: '<"row"<"col-md-12"<"row mx-0"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row mx-0"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>> >',
+                buttons: {
+                    buttons: [{
+                            extend: "copy",
+                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2"
+                        },
+                        {
+                            extend: "csv",
+                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2"
+                        },
+                        {
+                            extend: "pdf",
+                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2",
+                            exportOptions: {
+                                columns: [0, 1, 2]
+                            },
+                            customize: function(doc) {
+                                doc.content[1].table.widths =
+                                    Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+                            }
+                        },
+                        {
+                            extend: "excel",
+                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2"
+                        },
+                        {
+                            extend: "print",
+                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2"
+                        },
+                    ],
+                },
+            });
+        });
+    </script>
 </body>
 
 </html>
