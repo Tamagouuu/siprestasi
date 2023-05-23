@@ -3,6 +3,9 @@ require '../../config.php';
 require '../../functions.php';
 
 guest_move_to_login();
+checkParamsExist(['tb_lomba' => 'lid']);
+
+
 $tingkat_option = get_tingkat_lomba_option();
 $jenis_option =  get_jenis_lomba_option();
 $tahun_pelajaran = query('SELECT * FROM tb_tapel');
@@ -47,7 +50,9 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
+
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -81,15 +86,15 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="lnama" class="form-label">Nama Lomba</label>
-                            <input name="lnama" class="form-control" id="lnama" value="<?= $lomba['lnama'] ?>" />
+                            <input name="lnama" class="form-control" id="lnama" value="<?= $lomba['lnama'] ?>" required />
                         </div>
                         <div class="mb-3">
                             <label for="ltahun" class="form-label">Tahun Lomba</label>
-                            <input type="number" name="ltahun" class="form-control" id="ltahun" value="<?= $lomba['ltahun'] ?>" />
+                            <input type="number" name="ltahun" class="form-control" id="ltahun" value="<?= $lomba['ltahun'] ?>" required />
                         </div>
                         <div class="mb-3">
                             <label for="ltingkat" class="form-label">Tingkat Lomba</label>
-                            <select name="ltingkat" id="ltingkat" class="form-control">
+                            <select name="ltingkat" id="ltingkat" class="form-control" required>
                                 <?php foreach ($tingkat_option as $option) : ?>
                                     <option value="<?= $option ?>" <?php if ($option == $lomba['ltingkat']) : ?> selected <?php endif ?>>
                                         <?= $option ?>
@@ -99,7 +104,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3">
                             <label for="ljenis" class="form-label">Jenis Lomba</label>
-                            <select name="ljenis" id="ljenis" class="form-control">
+                            <select name="ljenis" id="ljenis" class="form-control" required>
                                 <?php foreach ($jenis_option as $jenis_kode => $jenis_label) : ?>
                                     <option value="<?= $jenis_kode ?>" <?php if ($jenis_kode == $lomba['ljenis']) : ?> selected <?php endif ?>>
                                         <?= $jenis_label ?>
@@ -109,7 +114,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3">
                             <label for="tid" class="form-label">Tahun Pelajaran</label>
-                            <select name="tid" id="tid" class="form-control">
+                            <select name="tid" id="tid" class="form-control" required>
                                 <?php foreach ($tahun_pelajaran as $option) : ?>
                                     <option value="<?= $option['tid'] ?>" <?php if ($option['tid'] == $lomba['tid']) : ?> selected <?php endif ?>>
                                         <?= $option['ttapel'] ?>
@@ -119,7 +124,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3">
                             <label for="lpenyelenggara" class="form-label">Penyelenggara</label>
-                            <input name="lpenyelenggara" class="form-control" id="lpenyelenggara" value="<?= $lomba['lpenyelenggara'] ?>" />
+                            <input name="lpenyelenggara" class="form-control" id="lpenyelenggara" value="<?= $lomba['lpenyelenggara'] ?>" required />
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>

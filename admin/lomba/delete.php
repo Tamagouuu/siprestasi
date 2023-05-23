@@ -2,6 +2,9 @@
 require '../../config.php';
 require '../../functions.php';
 
+
+checkParamsExist(['tb_lomba' => 'lid']);
+
 $idLomba = mysqli_escape_string($conn, $_GET['lid']) ?? null;
 
 if ($idLomba == null) {

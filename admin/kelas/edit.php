@@ -4,6 +4,8 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+checkParamsExist(['tb_kelas' => 'kid']);
+
 $idKelas = mysqli_escape_string($conn, $_GET['kid']);
 $tapel = query("SELECT * FROM tb_tapel");
 
@@ -33,7 +35,8 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -67,11 +70,11 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="knama" class="form-label">Nama Kelas</label>
-                            <input name="knama" class="form-control" id="knama" value="<?= $dataKelas['knama'] ?>" />
+                            <input name="knama" class="form-control" id="knama" value="<?= $dataKelas['knama'] ?>" required />
                         </div>
                         <div class="mb-3">
                             <label for="ktingkat" class="form-label">Tingkat</label>
-                            <select name="ktingkat" id="ktingkat" class="form-control">>
+                            <select name="ktingkat" id="ktingkat" class="form-control" required>
                                 <option value="10" <?= $dataKelas['ktingkat'] == 10 ? 'selected' : '' ?>>10</option>
                                 <option value="11" <?= $dataKelas['ktingkat'] == 11 ? 'selected' : '' ?>>11</option>
                                 <option value="12" <?= $dataKelas['ktingkat'] == 12 ? 'selected' : '' ?>>12</option>
@@ -79,7 +82,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3">
                             <label for="tid" class="form-label">Tahun Pelajaran</label>
-                            <select name="tid" id="tid" class="form-control">
+                            <select name="tid" id="tid" class="form-control" required>
                                 <?php foreach ($tapel as $option) : ?>
                                     <option value="<?= $option['tid'] ?>" <?= $option['tid'] == $dataKelas['tid'] ? 'selected' : '' ?>>
                                         <?= $option['ttapel'] ?>

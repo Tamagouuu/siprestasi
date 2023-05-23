@@ -2,6 +2,9 @@
 require '../../config.php';
 require '../../functions.php';
 
+checkParamsExist(['tb_admin' => 'aid']);
+
+
 $idAdmin = mysqli_escape_string($conn, $_GET['aid']) ?? null;
 
 if ($idAdmin == null) {

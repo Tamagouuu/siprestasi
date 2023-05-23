@@ -132,7 +132,7 @@ function upload($name)
 
 	// if there's no image, use default image
 	if ($error === 4) {
-		return false;
+		return null;
 	}
 
 	$allowedExtension = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'jfif', 'webp', 'pdf'];
@@ -157,4 +157,62 @@ function upload($name)
 	move_uploaded_file($tmpName, "../../document/piagam/" . $newFileName);
 
 	return $newFileName;
+}
+
+function checkParamsExist(array $params)
+{
+	foreach ($params as $table => $value) {
+		if (!isset($_GET[$value])) {
+			echo "<script>window.history.go(-1)</script>";
+			exit;
+		}
+		$checkData = query("SELECT COUNT(*) as countData FROM $table WHERE $table.$value = '{$_GET[$value]}'")[0];
+		if ($checkData['countData'] == 0) {
+			echo "<script>window.history.go(-1)</script>";
+			exit;
+		}
+	}
+}
+
+function backToPrevPage()
+{
+	echo "<script>window.history.go(-1)</script>";
+	exit;
+}
+
+function checkTahunAjaran()
+{
+	// $q = query("SELECT v_siswa_kelas.ttapel, v_siswa_kelas.ktingkat, v_siswa_kelas.sid FROM `v_siswa_kelas_aktif` JOIN v_siswa_kelas ON v_siswa_kelas.sid = v_siswa_kelas_aktif.sid AND v_siswa_kelas.ktingkat = v_siswa_kelas_aktif.tingkat WHERE v_siswa_kelas.sid = '28833'")[0];
+
+	$tahun_ajaran = "2022/2023";
+	$tingkat = "10";
+
+	$tahun_ajaran_list = [$tingkat => $tahun_ajaran];
+
+	$tahun_explode = explode('/', $tahun_ajaran);
+
+	if ($tingkat == "12") {
+		for ($i = 1; $i <= 2; $i++) {
+			$tahun1 = ($tahun_explode[0] - $i);
+			$tahun2 = ($tahun_explode[1] - $i);
+			$tahun_ajaran_list[$tingkat - $i] = "$tahun1/$tahun2";
+		}
+	}
+
+	if ($tingkat == "11") {
+		$tahun_ajaran_list[10] = ($tahun_explode[0] - 1) . "/" . ($tahun_explode[1] - 1);
+		$tahun_ajaran_list[12] = ($tahun_explode[0] + 1) . "/" . ($tahun_explode[1] + 1);
+	}
+
+	if ($tingkat == "10") {
+		for ($i = 1; $i <= 2; $i++) {
+			$tahun1 = ($tahun_explode[0] + $i);
+			$tahun2 = ($tahun_explode[1] + $i);
+			$tahun_ajaran_list[$tingkat + $i] = "$tahun1/$tahun2";
+		}
+	}
+
+	dd($tahun_ajaran_list);
+
+	exit;
 }

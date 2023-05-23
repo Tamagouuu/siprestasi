@@ -29,7 +29,8 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -64,15 +65,15 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="sid" class="form-label">NIS</label>
-                            <input name="sid" class="form-control" id="sid" />
+                            <input name="sid" class="form-control" id="sid" required />
                         </div>
                         <div class="mb-3">
                             <label for="snama" class="form-label">Nama Siswa</label>
-                            <input name="snama" class="form-control" id="snama" />
+                            <input name="snama" class="form-control" id="snama" required />
                         </div>
                         <div class="mb-3">
                             <label for="sgender" class="form-label">Jenis Kelamin</label>
-                            <select name="sgender" id="sgender" class="form-control">
+                            <select name="sgender" id="sgender" class="form-control" required>
                                 <option value="L">Laki-Laki</option>
                                 <option value="P">Perempuan</option>
                             </select>

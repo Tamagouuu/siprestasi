@@ -37,7 +37,8 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

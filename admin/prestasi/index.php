@@ -3,11 +3,13 @@ include '../../config.php';
 include '../../functions.php';
 guest_move_to_login();
 
-$data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid = tb_lomba.lid');
+$dataSiswa = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid = tb_lomba.lid WHERE tb_lomba.ljenis = 2');
+$dataGuru = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid = tb_lomba.lid WHERE tb_lomba.ljenis = 1');
 
+// dd($dataSiswa);
 
 // echo "<pre>";
-// var_dump($data);
+// var_dump($dataSiswa);
 // echo "</pre>";
 
 ?>
@@ -22,7 +24,8 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -69,15 +72,16 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Prestasi</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Prestasi Siswa</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Nama </th>
                                             <th>Peringkat</th>
+                                            <th>Tahun</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -85,14 +89,16 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
                                         <tr>
                                             <th>Nama Lomba</th>
                                             <th>Peringkat</th>
+                                            <th>Tahun</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php foreach ($data as $d) : ?>
+                                        <?php foreach ($dataSiswa as $d) : ?>
                                             <tr>
                                                 <td><?= $d['lnama'] ?></td>
                                                 <td><?= $d['pperingkat'] ?></td>
+                                                <td><?= $d['ltahun'] ?></td>
                                                 <td>
                                                     <a href="<?= BASE_URL ?>/admin/prestasi/edit.php?pid=<?= $d['pid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
                                                         <i class="fas fa-pencil-alt"></i>
@@ -112,6 +118,53 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
                         </div>
                     </div>
 
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Data Prestasi Guru</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama </th>
+                                            <th>Peringkat</th>
+                                            <th>Tahun</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nama Lomba</th>
+                                            <th>Peringkat</th>
+                                            <th>Tahun</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <?php foreach ($dataGuru as $d) : ?>
+                                            <tr>
+                                                <td><?= $d['lnama'] ?></td>
+                                                <td><?= $d['pperingkat'] ?></td>
+                                                <td><?= $d['ltahun'] ?></td>
+                                                <td>
+                                                    <a href="<?= BASE_URL ?>/admin/prestasi/edit.php?pid=<?= $d['pid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                    <a onclick="return confirm('Yakin ingin menghapus?')" href="<?= BASE_URL ?>/admin/prestasi/delete.php?pid=<?= $d['pid'] ?>" class=" btn btn-danger btn-circle btn-sm my-1">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                    <a href="<?= BASE_URL ?>/admin/prestasi/tambah-prestasi-<?= $d['ljenis'] == 1 ? 'guru' : 'siswa' ?>.php?pid=<?= $d['pid'] ?>" class=" btn btn-primary btn-circle btn-sm my-1">
+                                                        <i class="fas fa-plus"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -154,7 +207,11 @@ $data = query('SELECT * FROM tb_prestasi INNER JOIN tb_lomba ON tb_prestasi.lid 
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".display").DataTable();
+        });
+    </script>
 
 </body>
 

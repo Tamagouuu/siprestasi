@@ -2,8 +2,8 @@
 
 session_start();
 
-CONST BASE_URL = 'http://localhost/siprestasi';
-CONST DB_HOST = 'localhost';
-CONST DB_NAME = 'db_siprestasi';
-CONST DB_USER = 'root';
-CONST DB_PASS = '';
+const BASE_URL = 'http://localhost/siprestasi';
+const DB_HOST = 'localhost';
+const DB_NAME = 'db_siprestasi';
+const DB_USER = 'root';
+const DB_PASS = '';

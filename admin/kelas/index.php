@@ -19,7 +19,8 @@ $data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_t
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -168,62 +169,8 @@ $data = query('SELECT * FROM tb_kelas INNER JOIN tb_tapel ON tb_kelas.tid = tb_t
     <script>
         // Call the dataTables jQuery plugin
         $(document).ready(function() {
-            $("#dataTable").DataTable({
-                initComplete: function() {
-                    this.api()
-                        .columns([2, 3])
-                        .every(function() {
-                            var column = this;
-                            var select = $('<select class="form-control"><option value="">--- Filter Data ---</option></select>')
-                                .appendTo($(column.footer()).empty())
-                                .on('change', function() {
-                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
-                                });
-
-                            column
-                                .data()
-                                .unique()
-                                .sort()
-                                .each(function(d, j) {
-                                    select.append('<option value="' + d + '">' + d + '</option>');
-                                });
-                        });
-                },
-                dom: '<"row"<"col-md-12"<"row mx-0"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row mx-0"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>> >',
-                buttons: {
-                    buttons: [{
-                            extend: "copy",
-                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2"
-                        },
-                        {
-                            extend: "csv",
-                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2"
-                        },
-                        {
-                            extend: "pdf",
-                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2",
-                            exportOptions: {
-                                columns: [0, 1, 2]
-                            },
-                            customize: function(doc) {
-                                doc.content[1].table.widths =
-                                    Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-                            }
-                        },
-                        {
-                            extend: "excel",
-                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2"
-                        },
-                        {
-                            extend: "print",
-                            className: "btn btn-primary btn-rounded btn-sm mb-md-4 mb-2"
-                        },
-                    ],
-                },
-            });
-        });
+            $("#dataTable").DataTable();
+        })
     </script>
 </body>
 

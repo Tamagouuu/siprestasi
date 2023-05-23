@@ -4,6 +4,9 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+checkParamsExist(['tb_guru' => 'gid']);
+
+
 $idGuru = mysqli_escape_string($conn, $_GET['gid']);
 
 $guru = query("SELECT * FROM tb_guru WHERE gid = '$idGuru'")[0] ?? null;
@@ -11,8 +14,9 @@ if (isset($_POST['submit'])) {
     $gnama = mysqli_escape_string($conn, $_POST['gnama']);
     $gkontak = mysqli_escape_string($conn, $_POST['gkontak']);
     $gstatus = mysqli_escape_string($conn, $_POST['gstatus']);
+    $gmapel = mysqli_escape_string($conn, $_POST['gmapel']);
 
-    $q = mysqli_query($conn, "UPDATE tb_guru SET gnama = '$gnama', gkontak = '$gkontak', gstatus = '$gstatus'  WHERE gid = '$idGuru'");
+    $q = mysqli_query($conn, "UPDATE tb_guru SET gnama = '$gnama', gkontak = '$gkontak', gmapel='', gmapel = '$gmapel'  WHERE gid = '$idGuru'");
 
     set_flash('success', 'Berhasil mengupdate data guru!');
     header('location: index.php');
@@ -30,8 +34,9 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -65,15 +70,19 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="gnama" class="form-label">Nama Guru</label>
-                            <input name="gnama" class="form-control" id="gnama" value="<?= $guru['gnama'] ?>" />
+                            <input name="gnama" class="form-control" id="gnama" value="<?= $guru['gnama'] ?>" required />
                         </div>
                         <div class="mb-3">
                             <label for="gkontak" class="form-label">No. Kontak</label>
-                            <input name="gkontak" class="form-control" id="gkontak" value="<?= $guru['gkontak'] ?>" />
+                            <input name="gkontak" class="form-control" id="gkontak" value="<?= $guru['gkontak'] ?>" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="gmapel" class="form-label">Mapel</label>
+                            <input name="gmapel" class="form-control" id="gmapel" value="<?= $guru['gmapel'] ?>" />
                         </div>
                         <div class="mb-3">
                             <label for="gstatus" class="form-label">Status</label>
-                            <select name="gstatus" id="gstatus" class="form-control">
+                            <select name="gstatus" id="gstatus" class="form-control" required>
                                 <option value="1" <?= $guru['gstatus'] == 1 ? 'selected' : '' ?>>Guru</option>
                                 <option value="2" <?= $guru['gstatus'] == 2 ? 'selected' : '' ?>>Non Guru</option>
                             </select>

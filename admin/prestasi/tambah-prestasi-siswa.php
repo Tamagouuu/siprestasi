@@ -4,6 +4,9 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+checkParamsExist(['tb_prestasi' => 'pid']);
+
+
 // $lomba = query("SELECT * FROM tb_lomba");
 $prestasi = query("SELECT * FROM `tb_prestasi` JOIN tb_lomba ON tb_lomba.lid = tb_prestasi.lid WHERE pid = {$_GET['pid']}")[0];
 
@@ -67,7 +70,9 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
+
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -76,6 +81,8 @@ if (isset($_POST['submit'])) {
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/select2.min.css">
+    <link href="../../css/styles.css" rel="stylesheet">
 
 </head>
 
@@ -117,7 +124,8 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3" id="input-wrapper">
                             <label for="sid" class="form-label">Siswa</label>
-                            <select id="sid" class="form-control" name="sid">
+                            <select class="siswa-select form-control select2 select2-hidden-accessible" name="sid" required>
+                                <option></option>
                                 <?php foreach ($siswa as $option) : ?>
                                     <option value="<?= $option['sid'] ?>"><?= $option['snama'] ?></option>
                                 <?php endforeach ?>
@@ -237,6 +245,8 @@ if (isset($_POST['submit'])) {
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="../../js/select2.min.js"></script>
+
 
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
@@ -246,23 +256,44 @@ if (isset($_POST['submit'])) {
     <script>
         $(document).ready(function() {
             $("table.display").DataTable();
+            $('.siswa-select').select2({
+                // theme: "bootstrap",
+                width: "100%",
+                placeholder: "Cari nama siswa"
+            });
 
             $('input[name="showInput"]').on("change", (e) => {
+
                 if (e.target.value == 'siswa') {
                     $("#input-wrapper").html(`  <label for="sid" class="form-label">Siswa</label>
-                            <select id="sid" class="form-control" name="sid">
+                             <select class="siswa-select form-control select2 select2-hidden-accessible" name="sid" required>
+                                <option></option>
                                 <?php foreach ($siswa as $option) : ?>
                                     <option value="<?= $option['sid'] ?>"><?= $option['snama'] ?></option>
                                 <?php endforeach ?>
                             </select>`)
                 } else {
                     $("#input-wrapper").html(`<label for="gid" class="form-label">Guru</label>
-                            <select id="gid" class="form-control" name="gid">
+                                
+                          <select class="guru-select form-control select2 select2-hidden-accessible" name="gid" required>
+                            <option></option>
                                 <?php foreach ($guru as $option) : ?>
                                     <option value="<?= $option['gid'] ?>"><?= $option['gnama'] ?></option>
                                 <?php endforeach ?>
                             </select>`)
                 }
+
+                $('.siswa-select').select2({
+                    // theme: "bootstrap",
+                    width: "100%",
+                    placeholder: "Cari nama siswa"
+                });
+
+                $('.guru-select').select2({
+                    // theme: "bootstrap",
+                    width: "100%",
+                    placeholder: "Cari nama guru"
+                });
             })
         });
     </script>

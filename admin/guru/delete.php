@@ -2,6 +2,9 @@
 require '../../config.php';
 require '../../functions.php';
 
+checkParamsExist(['tb_guru' => 'gid']);
+
+
 $idGuru = mysqli_escape_string($conn, $_GET['gid']) ?? null;
 
 if ($idGuru == null) {

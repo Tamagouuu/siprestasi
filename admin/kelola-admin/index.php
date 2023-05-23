@@ -17,8 +17,10 @@ $data = query('SELECT * FROM tb_admin');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
-    <title>SB Admin 2 - Dashboard</title>
+
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

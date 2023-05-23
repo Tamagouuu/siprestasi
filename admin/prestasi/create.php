@@ -10,12 +10,6 @@ $lomba = query("SELECT * FROM tb_lomba");
 if (isset($_POST['submit'])) {
     $dokumen = upload('pdokumen');
 
-    if (!$dokumen) {
-        set_flash('danger', 'Data gagal ditambahkan!');
-        redirect('/admin/prestasi/index.php');
-        return false;
-    }
-
     $lid = mysqli_escape_string($conn, $_POST['lid']);
     $pperingkat = mysqli_escape_string($conn, $_POST['pperingkat']);
     $pdokumen = mysqli_escape_string($conn, $dokumen);
@@ -40,7 +34,8 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -76,7 +71,7 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="lid" class="form-label">Lomba</label>
-                            <select name="lid" id="lid" class="form-control">
+                            <select name="lid" id="lid" class="form-control" required>
                                 <?php foreach ($lomba as $option) : ?>
                                     <option value="<?= $option['lid'] ?>"><?= $option['lnama'] ?></option>
                                 <?php endforeach; ?>
@@ -84,14 +79,14 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-4">
                             <label for="pperingkat" class="form-label">Peringkat</label>
-                            <input name="pperingkat" class="form-control" id="pperingkat" />
+                            <input name="pperingkat" class="form-control" id="pperingkat" required />
                         </div>
                         <div class="input-group mb-3 mt-2">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupFileAddon01">Upload Dokumen</span>
                             </div>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="pdokumen" required>
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="pdokumen">
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                         </div>

@@ -4,11 +4,14 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+
 $idPrestasi = mysqli_escape_string($conn, $_GET['pid']);
 
 $lomba = query("SELECT * FROM tb_lomba");
 
 $prestasi = query("SELECT * FROM tb_prestasi WHERE pid = '$idPrestasi'")[0];
+
+
 
 if (isset($_POST['submit'])) {
 
@@ -52,7 +55,8 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -86,7 +90,7 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="lid" class="form-label">Lomba</label>
-                            <select name="lid" id="lid" class="form-control">
+                            <select name="lid" id="lid" class="form-control" required>
                                 <?php foreach ($lomba as $option) : ?>
                                     <option value="<?= $option['lid'] ?>" <?= $prestasi['lid'] == $option['lid'] ? 'selected' : '' ?>><?= $option['lnama'] ?></option>
                                 <?php endforeach; ?>

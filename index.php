@@ -17,7 +17,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
   <title>SI Prestasi SMK Negeri 1 Denpasar</title>
-  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="css/sb-admin-2.min.css" />
   <link rel="stylesheet" type="text/css" href="css/landing-page.css" />
@@ -68,11 +68,9 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
     <!-- Header -->
     <div id="headerWrapper" class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-12 col-sm-12 col-12 align-self-center mb-lg-0 mb-5">
-          <div class="site-header-inner mt-lg-0 mt-5 text-center">
-            <h2>Sistem Informasi Prestasi SMK Negeri 1 Denpasar</h2>
-            <a class="btn btn-primary mb-2 mx-1 js-scroll-trigger mt-5" href="#prestasiWrapper">List Prestasi</a>
-          </div>
+        <div class="site-header-inner mt-lg-0 mt-5 text-center mx-auto">
+          <h2>Sistem Informasi Prestasi <br> SMK Negeri 1 Denpasar</h2>
+          <a class="btn btn-primary mb-2 mx-1 js-scroll-trigger mt-5" href="#prestasiWrapper">List Prestasi</a>
         </div>
       </div>
     </div>
@@ -109,6 +107,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
         </ul>
       </div>
 
+
       <div class="col-md-12">
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-siswa" role="tabpanel" aria-labelledby="pills-siswa-tab">
@@ -117,6 +116,8 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
                 <h6 class="m-0 font-weight-bold text-primary">Data Prestasi Siswa</h6>
               </div>
               <div class="card-body">
+                <a class="btn btn-outline-primary ml-2 mb-3" href="<?= BASE_URL . "/cari-prestasi.php" ?>"><i class="fa fa-search"></i> Cari dengan nama siswa / guru</a>
+
                 <div class="table-responsive">
                   <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -125,6 +126,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
                         <th>Tingkat</th>
                         <th>Penyelenggara</th>
                         <th>Peringkat</th>
+                        <th>Tahun</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
@@ -134,6 +136,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
                         <th>Tingkat</th>
                         <th>Penyelenggara</th>
                         <th>Peringkat</th>
+                        <th>Tahun</th>
                         <th>Aksi</th>
                       </tr>
                     </tfoot>
@@ -144,6 +147,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
                           <td><?= ucfirst($d['ltingkat']) ?></td>
                           <td><?= $d['lpenyelenggara'] ?></td>
                           <td><?= $d['pperingkat'] ?></td>
+                          <td><?= $d['ltahun'] ?></td>
                           <td class="text-center">
                             <a href="<?= BASE_URL ?>/detail-prestasi.php?pid=<?= $d['pid'] ?>" class=" btn btn-primary btn-sm my-1">
                               Detail
@@ -164,6 +168,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
                 <h6 class="m-0 font-weight-bold text-primary">Data Prestasi Guru</h6>
               </div>
               <div class="card-body">
+                <a class="btn btn-outline-primary ml-2 mb-3" href="<?= BASE_URL . "/cari-prestasi.php" ?>"><i class="fa fa-search"></i> Cari dengan nama siswa / guru</a>
                 <div class="table-responsive">
                   <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -172,6 +177,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
                         <th>Tingkat</th>
                         <th>Penyelenggara</th>
                         <th>Peringkat</th>
+                        <th>Tahun</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
@@ -181,6 +187,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
                         <th>Tingkat</th>
                         <th>Penyelenggara</th>
                         <th>Peringkat</th>
+                        <th>Tahun</th>
                         <th>Aksi</th>
                       </tr>
                     </tfoot>
@@ -191,6 +198,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
                           <td><?= ucfirst($d['ltingkat']) ?></td>
                           <td><?= $d['lpenyelenggara'] ?></td>
                           <td><?= $d['pperingkat'] ?></td>
+                          <td><?= $d['ltahun'] ?></td>
                           <td class="text-center">
                             <a href="<?= BASE_URL ?>/detail-prestasi.php?pid=<?= $d['pid'] ?>" class=" btn btn-primary btn-sm my-1">
                               Detail
@@ -261,7 +269,7 @@ $dataPrestasiGuru = query('SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperi
       var table = $("table.display").DataTable({
         initComplete: function() {
           this.api()
-            .columns([0, 1, 2, 3])
+            .columns([0, 1, 2, 3, 4])
             .every(function() {
               var column = this;
               var select = $('<select class="form-control table-filter"><option value="">--- Filter Data ---</option></select>')

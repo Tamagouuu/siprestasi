@@ -4,6 +4,9 @@ require '../../functions.php';
 
 $idSiswa = mysqli_escape_string($conn, $_GET['sid']) ?? null;
 
+checkParamsExist(['tb_siswa' => 'sid']);
+
+
 if ($idSiswa == null) {
     return redirect('admin/siswa/index.php');
 }

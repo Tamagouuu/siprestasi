@@ -4,6 +4,9 @@ require '../../functions.php';
 
 guest_move_to_login();
 
+checkParamsExist(['tb_tapel' => 'tid']);
+
+
 $idTapel = mysqli_escape_string($conn, $_GET['tid']);
 
 $dataTapel = query("SELECT * FROM tb_tapel WHERE tid = '$idTapel'")[0] ?? null;
@@ -30,7 +33,7 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -64,7 +67,7 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="ttapel" class="form-label">Tahun Pelajaran</label>
-                            <input name="ttapel" class="form-control" id="ttapel" value="<?= $dataTapel['ttapel'] ?>" />
+                            <input name="ttapel" class="form-control" id="ttapel" value="<?= $dataTapel['ttapel'] ?>" required />
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>

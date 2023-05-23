@@ -2,6 +2,8 @@
 require '../../config.php';
 require '../../functions.php';
 
+checkParamsExist(['tb_tapel' => 'tid']);
+
 $idTapel = mysqli_escape_string($conn, $_GET['tid']) ?? null;
 
 if ($idTapel == null) {

@@ -32,7 +32,8 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -67,11 +68,11 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="knama" class="form-label">Nama Kelas</label>
-                            <input name="knama" class="form-control" id="knama" />
+                            <input name="knama" class="form-control" id="knama" required />
                         </div>
                         <div class="mb-3">
                             <label for="ktingkat" class="form-label">Tingkat</label>
-                            <select name="ktingkat" id="ktingkat" class="form-control">>
+                            <select name="ktingkat" id="ktingkat" class="form-control" required>
                                 <option value="10">10</option>
                                 <option value="11">11</option>
                                 <option value="12">12</option>
@@ -79,7 +80,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3">
                             <label for="tid" class="form-label">Tahun Pelajaran</label>
-                            <select name="tid" id="tid" class="form-control">
+                            <select name="tid" id="tid" class="form-control" required>
                                 <?php foreach ($tapel as $option) : ?>
                                     <option value="<?= $option['tid'] ?>">
                                         <?= $option['ttapel'] ?>

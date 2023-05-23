@@ -2,6 +2,8 @@
 require '../../config.php';
 require '../../functions.php';
 
+checkParamsExist(['tb_prestasi' => 'pid']);
+
 if (array_key_exists('gid', $_GET)) {
     $idGuru = mysqli_escape_string($conn, $_GET['gid']) ?? null;
     $idPrestasi = mysqli_escape_string($conn, $_GET['pid']) ?? null;

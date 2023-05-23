@@ -2,6 +2,9 @@
 include 'config.php';
 include 'functions.php';
 
+checkParamsExist(['tb_prestasi' => 'pid']);
+
+
 $prestasiId = $_GET['pid'];
 
 $dataPrestasi = query("SELECT tb_lomba.*, tb_prestasi.pid, tb_prestasi.pperingkat, tb_prestasi.pdokumen FROM `tb_lomba` JOIN tb_prestasi ON tb_lomba.lid = tb_prestasi.lid WHERE pid = $prestasiId")[0];
@@ -13,7 +16,7 @@ $isPrestasiGuru = $dataPrestasi['ljenis'] == 1;
 if ($isPrestasiGuru) {
     $dataGuru = query("SELECT tb_guru.*, tb_ref_prestasi_guru.pid FROM tb_ref_prestasi_guru JOIN tb_guru ON tb_guru.gid = tb_ref_prestasi_guru.gid WHERE tb_ref_prestasi_guru.pid = $prestasiId");
 } else {
-    $dataPrestasiSiswa = query("SELECT tb_siswa.*, tb_kelas.* FROM `tb_lomba` JOIN tb_prestasi ON tb_lomba.lid = tb_prestasi.lid JOIN tb_ref_prestasi_siswa ON tb_ref_prestasi_siswa.pid = tb_prestasi.pid JOIN tb_siswa ON tb_siswa.sid = tb_ref_prestasi_siswa.sid JOIN tb_ref_kelas_siswa ON tb_ref_prestasi_siswa.sid = tb_ref_kelas_siswa.sid JOIN tb_kelas ON tb_kelas.kid = tb_ref_kelas_siswa.kid WHERE tb_prestasi.pid = $prestasiId");
+    $dataPrestasiSiswa = query("SELECT tb_siswa.*, tb_kelas.* FROM `tb_lomba` JOIN tb_prestasi ON tb_lomba.lid = tb_prestasi.lid JOIN tb_ref_prestasi_siswa ON tb_ref_prestasi_siswa.pid = tb_prestasi.pid JOIN tb_siswa ON tb_siswa.sid = tb_ref_prestasi_siswa.sid JOIN tb_ref_kelas_siswa ON tb_ref_prestasi_siswa.sid = tb_ref_kelas_siswa.sid JOIN tb_kelas ON tb_kelas.kid = tb_ref_kelas_siswa.kid WHERE tb_prestasi.pid = $prestasiId AND tb_kelas.tid = {$dataPrestasi['tid']}");
 
     $dataGuru = query("SELECT tb_guru.*, tb_ref_prestasi_pemb.pid FROM tb_ref_prestasi_pemb JOIN tb_guru ON tb_guru.gid = tb_ref_prestasi_pemb.gid WHERE tb_ref_prestasi_pemb.pid = $prestasiId");
 }
@@ -31,7 +34,8 @@ if ($isPrestasiGuru) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>JalanKuy | Home</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -185,7 +189,7 @@ if ($isPrestasiGuru) {
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; JalanKuy 2023</span>
+                        <span>Copyright &copy; SI Prestasi 2023</span>
                     </div>
                 </div>
             </footer><!-- End of Footer -->

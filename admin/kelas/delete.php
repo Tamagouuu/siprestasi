@@ -2,6 +2,9 @@
 require '../../config.php';
 require '../../functions.php';
 
+checkParamsExist(['tb_kelas' => 'kid']);
+
+
 $idKelas = mysqli_escape_string($conn, $_GET['kid']) ?? null;
 
 if ($idKelas == null) {

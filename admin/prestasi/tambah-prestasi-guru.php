@@ -3,6 +3,8 @@ require '../../config.php';
 require '../../functions.php';
 
 guest_move_to_login();
+checkParamsExist(['tb_prestasi' => 'pid']);
+
 
 // $lomba = query("SELECT * FROM tb_lomba");
 $prestasi = query("SELECT * FROM `tb_prestasi` JOIN tb_lomba ON tb_lomba.lid = tb_prestasi.lid WHERE pid = {$_GET['pid']}")[0];
@@ -23,6 +25,7 @@ foreach ($guru as $key => $g) {
         unset($guru[$key]);
     }
 }
+
 
 if (isset($_POST['submit'])) {
 
@@ -49,7 +52,8 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

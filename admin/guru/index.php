@@ -17,10 +17,12 @@ $data = query('SELECT * FROM tb_guru');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
 
     <!-- Custom fonts for this template-->
+
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -74,6 +76,7 @@ $data = query('SELECT * FROM tb_guru');
                                         <tr>
                                             <th>Nama Guru</th>
                                             <th>Kontak</th>
+                                            <th>Mata Pelajaran</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -82,6 +85,7 @@ $data = query('SELECT * FROM tb_guru');
                                         <tr>
                                             <th>Nama Guru</th>
                                             <th>Kontak</th>
+                                            <th>Mata Pelajaran</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -89,8 +93,9 @@ $data = query('SELECT * FROM tb_guru');
                                     <tbody>
                                         <?php foreach ($data as $d) : ?>
                                             <tr>
-                                                <td><?= $d['gnama'] ?></td>
+                                                <td><?= strtoupper($d['gnama']) ?></td>
                                                 <td><?= $d['gkontak'] ?></td>
+                                                <td><?= $d['gmapel'] ?></td>
                                                 <td><?= $d['gstatus'] == 1 ? 'Guru' : 'Non Guru' ?></td>
                                                 <td>
                                                     <a href="<?= BASE_URL ?>/admin/guru/edit.php?gid=<?= $d['gid'] ?>" class=" btn btn-warning btn-circle btn-sm my-1">

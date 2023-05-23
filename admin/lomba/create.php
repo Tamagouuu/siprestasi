@@ -5,7 +5,7 @@ require '../../functions.php';
 guest_move_to_login();
 $tingkat_option = get_tingkat_lomba_option();
 $jenis_option =  get_jenis_lomba_option();
-$tahun_pelajaran = query('SELECT * FROM tb_tapel');
+$tahun_pelajaran = query('SELECT * FROM tb_tapel ORDER BY ttapel DESC');
 
 if (isset($_POST['submit'])) {
     $jenis = mysqli_escape_string($conn, $_POST['ljenis']);
@@ -37,7 +37,8 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SI Prestasi SMK Negeri 1 Denpasar</title>
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/favicon.ico" />
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -71,15 +72,15 @@ if (isset($_POST['submit'])) {
                     <form method="post" class="card p-3">
                         <div class="mb-3">
                             <label for="lnama" class="form-label">Nama Lomba</label>
-                            <input name="lnama" class="form-control" id="lnama" />
+                            <input name="lnama" class="form-control" id="lnama" required />
                         </div>
                         <div class="mb-3">
                             <label for="ltahun" class="form-label">Tahun Lomba</label>
-                            <input type="number" name="ltahun" class="form-control" id="ltahun" />
+                            <input type="number" name="ltahun" class="form-control" id="ltahun" required />
                         </div>
                         <div class="mb-3">
                             <label for="ltingkat" class="form-label">Tingkat Lomba</label>
-                            <select name="ltingkat" id="ltingkat" class="form-control">
+                            <select name="ltingkat" id="ltingkat" class="form-control" required>
                                 <?php foreach ($tingkat_option as $option) : ?>
                                     <option value="<?= $option ?>">
                                         <?= ucwords($option) ?>
@@ -89,9 +90,9 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3">
                             <label for="ljenis" class="form-label">Jenis Lomba</label>
-                            <select name="ljenis" id="ljenis" class="form-control">
+                            <select name="ljenis" id="ljenis" class="form-control" required>
                                 <?php foreach ($jenis_option as $jenis_kode => $jenis_label) : ?>
-                                    <option value="<?= $jenis_kode ?>">
+                                    <option value="<?= $jenis_kode ?> " <?= $jenis_kode == 2 ? 'selected' : '' ?>>
                                         <?= $jenis_label ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -99,7 +100,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3">
                             <label for="tid" class="form-label">Tahun Pelajaran</label>
-                            <select name="tid" id="tid" class="form-control">
+                            <select name="tid" id="tid" class="form-control" required>
                                 <?php foreach ($tahun_pelajaran as $option) : ?>
                                     <option value="<?= $option['tid'] ?>">
                                         <?= $option['ttapel'] ?>
@@ -109,7 +110,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3">
                             <label for="lpenyelenggara" class="form-label">Penyelenggara</label>
-                            <input name="lpenyelenggara" class="form-control" id="lpenyelenggara" />
+                            <input name="lpenyelenggara" class="form-control" id="lpenyelenggara" required />
                         </div>
                         <div>
                             <button class="btn btn-success" name="submit">Simpan Data</button>

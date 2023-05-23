@@ -116,13 +116,13 @@ nav.navbar div div.button-inline a:hover {
 }
 nav.navbar.fixed-top.scrolling div div.button-inline a,
 nav.navbar.scrolling div div.button-inline a {
-  border: 1px solid #37074d;
-  color: #37074d;
+  border: 1px solid #229cf8;
+  color: #229cf8;
   font-weight: 500;
 }
 nav.navbar.fixed-top.scrolling div div.button-inline a:hover,
 nav.navbar.scrolling div div.button-inline a:hover {
-  background-color: #37074d;
+  background-color: #229cf8;
   color: #fff;
 }
 
@@ -141,10 +141,10 @@ nav.navbar.scrolling div div.button-inline a:hover {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  justify-content: center;
 }
 #headerWrapper .site-header-inner h2 {
   color: #ffffff;
-  line-height: 1.4;
   font-size: 47px;
   font-weight: 600;
 }

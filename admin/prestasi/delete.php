@@ -2,7 +2,10 @@
 require '../../config.php';
 require '../../functions.php';
 
+checkParamsExist(['tb_prestasi' => 'pid']);
+
 $idPrestasi = mysqli_escape_string($conn, $_GET['pid']) ?? null;
+
 
 if ($idPrestasi == null) {
     return redirect('admin/prestasi/index.php');
