@@ -63,6 +63,12 @@ $data = query('SELECT * FROM tb_siswa');
                         </span>
                         <span class="text">Tambah Data</span>
                     </a>
+                    <a href="<?= BASE_URL ?>/admin/siswa/import.php" class="btn btn-primary btn-icon-split mb-4">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-file-upload"></i>
+                        </span>
+                        <span class="text">Import Excel</span>
+                    </a>
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">

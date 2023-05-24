@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 // koneksi ke database
 $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -135,7 +138,12 @@ function upload($name)
 		return null;
 	}
 
-	$allowedExtension = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'jfif', 'webp', 'pdf'];
+	if ($name == "excel-data") {
+		$allowedExtension = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'jfif', 'webp', 'pdf'];
+	} elseif ($name == "pdokumen") {
+		$allowedExtension = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'jfif', 'webp', 'pdf'];
+	}
+
 	$imageExtension = explode('.', $fileName);
 	$imageExtension = strtolower(end($imageExtension));
 
@@ -215,4 +223,58 @@ function checkTahunAjaran()
 	dd($tahun_ajaran_list);
 
 	exit;
+}
+
+
+function uploadSiswa()
+{
+	global $conn;
+	$err = "";
+	$ekstensi = "";
+	$success = "";
+
+	$file_name = $_FILES['filexls']['name'];
+	$file_data = $_FILES['filexls']['tmp_name'];
+
+	if (empty($file_name)) {
+		$err .= "Silahkan masukkan file yang kamu inginkan";
+	} else {
+		$ekstensi = pathinfo($file_name)['extension'];
+	}
+
+	$ekstensi_allowed = ['xls', 'xlsx'];
+
+	if (!in_array($ekstensi, $ekstensi_allowed)) {
+		$err .= "Silahkan masukkan file tipe xls, atau xlsx. File yang kamu masukkan $file_name bertipe $ekstensi";
+	}
+
+	if (empty($err)) {
+		$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($file_data);
+		$spredsheet = $reader->load($file_data);
+		$sheetData = $spredsheet->getActiveSheet()->toArray();
+
+		$jumlahData = 0;
+
+		for ($i = 1; $i < count($sheetData); $i++) {
+			$nis = $sheetData[$i]['0'];
+			$nama = $sheetData[$i]['1'];
+			$gender = $sheetData[$i]['2'];
+
+			mysqli_query($conn, "INSERT INTO tb_siswa VALUES ('$nis', '$nama', '$gender')");
+
+			$jumlahData++;
+		}
+
+		if ($jumlahData > 0) {
+			$success = "Data sejumlah $jumlahData berhasil ditambahkan";
+		}
+	}
+
+	if ($err) {
+		return ['status' => 'error', 'message' => $err];
+	};
+
+	if ($success) {
+		return ['status' => 'success', 'message' => $success];
+	};
 }

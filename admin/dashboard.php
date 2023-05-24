@@ -172,7 +172,56 @@ guest_move_to_login();
 
                     </div>
 
+                    <div class="row">
 
+
+                        <!-- Pie Chart -->
+
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Prestasi Guru</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2">
+                                        <canvas id="chartGuru"></canvas>
+                                    </div>
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2"> <i class="fas fa-circle text-primary"></i> Kabupaten </span>
+                                        <span class="mr-2"> <i class="fas fa-circle text-success"></i> Provinsi </span>
+                                        <span class="mr-2"> <i class="fas fa-circle text-info"></i> Nasional </span>
+                                        <span class="mr-2"> <i class="fas fa-circle text-warning"></i> Regional </span>
+                                        <span class="mr-2"> <i class="fas fa-circle text-danger"></i> International </span>
+                                        <span class="mr-2"> <i class="fas fa-circle" style="color:#e31c93"></i> Lainnya </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Prestasi Siswa</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2">
+                                        <canvas id="chartSiswa"></canvas>
+                                    </div>
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2"> <i class="fas fa-circle text-primary"></i> Kabupaten </span>
+                                        <span class="mr-2"> <i class="fas fa-circle text-success"></i> Provinsi </span>
+                                        <span class="mr-2"> <i class="fas fa-circle text-info"></i> Nasional </span>
+                                        <span class="mr-2"> <i class="fas fa-circle text-warning"></i> Regional </span>
+                                        <span class="mr-2"> <i class="fas fa-circle text-danger"></i> International </span>
+                                        <span class="mr-2"> <i class="fas fa-circle" style="color:#e31c93"></i> Lainnya </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -213,7 +262,6 @@ guest_move_to_login();
     <script src="../vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
 
 </body>
